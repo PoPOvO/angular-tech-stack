@@ -18,5 +18,6 @@ export class CardComponent {
   @HostListener('window:click', ['$event'])
   clickListener(e) {
     console.log('SSSSSss监听到click', e);
+    console.log('错误提交');
   }
 }
