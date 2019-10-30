@@ -19,5 +19,6 @@ export class CardComponent {
   clickListener(e) {
     console.log('SSSSSss监听到click', e);
     console.log('SSSSSss监听到click', e);
+    console.log('SSSSSss正常click', e);
   }
 }
