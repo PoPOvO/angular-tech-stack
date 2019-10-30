@@ -1,0 +1,51 @@
+<div #te nz-col [nzSpan]="8">
+    <all-select
+      [optionValues]="optionValues"
+      [disableAllSelected]="false"
+      [formControl]="control"
+      (ngModelChange)="selectValueChange($event)"
+    >
+    </all-select>
+
+    <!--<custom-control-->
+      <!--[ngModel]="5"-->
+    <!--&gt;-->
+    <!--</custom-control>-->
+    <!--<br>-->
+    <!--<app-all-select-else-->
+      <!--*appUnless="true"-->
+      <!--[optionValues]="optionValues"-->
+      <!--[disableAllSelected]="false"-->
+      <!--[formControl]="control"-->
+      <!--(ngModelChange)="selectValueChange($event)"-->
+    <!--&gt;-->
+    <!--</app-all-select-else>-->
+  <ng-container *ngFor="let data of (arr | arrFilter)">
+    <p>{{data.value}}</p>
+  </ng-container>
+  <button nz-button nzType="primary" (click)="add()">新增</button>
+</div>
+<div #bb class="test" style="width: 200px;height: 200px"
+>
+  {{today | date:format}}-------{{10 | numberPow:3}}
+</div>
+
+<!--<div nz-col [nzSpan]="8">-->
+  <!--<all-select-->
+    <!--[optionValues]="optionValues"-->
+    <!--(valuesChange)="selectValueChange($event)"-->
+    <!--[disableAllSelected]="false"-->
+    <!--[formControl]="control"-->
+  <!--&gt;-->
+  <!--</all-select>-->
+<!--</div>-->
+<br/>
+<br/>
+<input #input value="Message">
+<button (click)="popup.showAsComponent(input.value)">Show as component</button>
+<button (click)="popup.showAsElement(input.value)">Show as element</button>
+<my-dialog [content]="'World!'" [content1]="'Hello!'" [content2]="''"></my-dialog>
+
+<hr>
+<p style="text-align: center">表单验证</p>
+

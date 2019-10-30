@@ -1,0 +1,15 @@
+/*:host {*/
+  /*display: block;*/
+  /*border: 4px solid lightgoldenrodyellow;*/
+  /*width: 800px;*/
+/*}*/
+
+/*:host-context(.test) {*/
+  /*display: block;*/
+  /*background-color: red;*/
+  /*width: 900px;*/
+/*}*/
+
+#hover :hover {
+  background-color:yellow;
+}

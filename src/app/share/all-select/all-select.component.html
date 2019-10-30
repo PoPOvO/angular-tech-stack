@@ -1,0 +1,23 @@
+<nz-select
+  style="width: 100%"
+  nzShowSearch
+  nzAllowClear
+  nzMode="multiple"
+  [nzPlaceHolder]="nzPlaceHolder"
+  [(ngModel)]="values"
+  (ngModelChange)="valuesChange($event)"
+  (nzOnSearch)="onSearch($event)"
+  [nzMaxTagCount]="nzMaxTagCount"
+  [nzAutoClearSearchValue]="nzAutoClearSearchValue"
+  [nzDropdownMatchSelectWidth]="nzDropdownMatchSelectWidth"
+  [nzDropdownRender]="render"
+>
+  <ng-container *ngFor="let option of optionValues">
+    <nz-option [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+  </ng-container>
+</nz-select>
+<ng-template #render>
+  <div *ngIf="enableRender === true" style="padding: 6px 12px;">
+    <nz-switch [(ngModel)]="allSelected" (ngModelChange)="switchChange()" nzCheckedChildren="全选" nzUnCheckedChildren="清除"></nz-switch>
+  </div>
+</ng-template>

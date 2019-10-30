@@ -1,0 +1,28 @@
+<nz-table #colSpanTable
+          [nzData]="dateSetElse"
+          nzBordered>
+  <thead>
+    <ng-container *ngFor="let headRow of tableHead1">
+      <tr>
+        <!-- 迭代表头 -->
+      <ng-container *ngFor="let key of headList">
+        <th *ngIf="headRow[key]?.rowspan > 0 && headRow[key]?.colspan > 0"
+            [attr.colspan]="headRow[key]?.colspan"
+            [attr.rowspan]="headRow[key]?.rowspan">{{headRow[key]?.value}}
+        </th>
+      </ng-container>
+      </tr>
+    </ng-container>
+  </thead>
+  <tbody>
+    <!-- 迭代数据集 -->
+    <tr *ngFor="let data of dateSetElse; let i = index">
+      <ng-container *ngFor="let key of headList">
+        <td *ngIf="data[key]?.rowspan > 0"
+            [attr.colspan]="data[key]?.colspan"
+            [attr.rowspan]="data[key]?.rowspan">{{data[key]?.value}}
+        </td>
+      </ng-container>
+    </tr>
+  </tbody>
+</nz-table>

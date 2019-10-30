@@ -1,0 +1,290 @@
+import { Component, OnInit } from '@angular/core';
+import {CommonService} from '../../service/common.service';
+
+@Component({
+  selector: 'app-welcome',
+  templateUrl: './welcome.component.html',
+  styleUrls: ['./welcome.component.css']
+})
+export class WelcomeComponent implements OnInit {
+  // 表头key
+  headList = [
+    'a',
+    'b',
+    'c1',
+    'c2',
+    'c3',
+    'c4',
+    'd1',
+    'd2',
+    'd3',
+    'd4',
+    'e1',
+    'e2',
+    'e3',
+    'e4',
+    'f1',
+    'f2',
+    'f3',
+    'f4'
+  ];
+
+  // 表头数据
+  tableHead1 = [
+    {
+      a: {value: '业务板块', rowspan: 2, colspan: 1},
+      b: {value: '业务部门', rowspan: 2, colspan: 1},
+      c1: {value: '2019年4月', rowspan: 1, colspan: 4},
+      c2: {value: '', rowspan: 1, colspan: 0},
+      c3: {value: '', rowspan: 1, colspan: 0},
+      c4: {value: '', rowspan: 1, colspan: 0},
+      d1: {value: '2019年3月', rowspan: 1, colspan: 4},
+      d2: {value: '', rowspan: 1, colspan: 0},
+      d3: {value: '', rowspan: 1, colspan: 0},
+      d4: {value: '', rowspan: 1, colspan: 0},
+      e1: {value: '2019年2月', rowspan: 1, colspan: 4},
+      e2: {value: '', rowspan: 1, colspan: 0},
+      e3: {value: '', rowspan: 1, colspan: 0},
+      e4: {value: '', rowspan: 1, colspan: 0},
+      f1: {value: '2019年1月', rowspan: 1, colspan: 4},
+      f2: {value: '', rowspan: 1, colspan: 0},
+      f3: {value: '', rowspan: 1, colspan: 0},
+      f4: {value: '', rowspan: 1, colspan: 0}
+    },
+    {
+      a: {value: '业务板块', rowspan: 0, colspan: 1},
+      b: {value: '业务部门', rowspan: 0, colspan: 1},
+      c1: {value: '质量指标', rowspan: 1, colspan: 1},
+      c2: {value: '质量加分', rowspan: 1, colspan: 1},
+      c3: {value: '质量事故', rowspan: 1, colspan: 1},
+      c4: {value: '总分', rowspan: 1, colspan: 1},
+      d1: {value: '质量指标', rowspan: 1, colspan: 1},
+      d2: {value: '质量加分', rowspan: 1, colspan: 1},
+      d3: {value: '质量事故', rowspan: 1, colspan: 1},
+      d4: {value: '总分', rowspan: 1, colspan: 1},
+      e1: {value: '质量指标', rowspan: 1, colspan: 1},
+      e2: {value: '质量加分', rowspan: 1, colspan: 1},
+      e3: {value: '质量事故', rowspan: 1, colspan: 1},
+      e4: {value: '总分', rowspan: 1, colspan: 1},
+      f1: {value: '质量指标', rowspan: 1, colspan: 1},
+      f2: {value: '质量加分', rowspan: 1, colspan: 1},
+      f3: {value: '质量事故', rowspan: 1, colspan: 1},
+      f4: {value: '总分', rowspan: 1, colspan: 1}
+    }
+  ];
+
+  // rowspan影响当前列上的table元素；colspan影响当前行上的table元素
+  // 如果要进行rowspan，那么要修改当前列上table元素对象的rowspan属性；
+  // 例如当前元素需要rowspan = 3，那么需要修改当前列上的table元素的rowspan=0.
+  // 如果要进行colspan，那么要修改当前行上table元素对象的colspan属性；
+  // 例如当前元素需要colspan = 3，那么需要修改当前列上的table元素的colspan=0.
+  dateSetElse = [
+    {
+      a: {value: '硬件业务板块', rowspan: 5, colspan: 1},
+      b: {value: '手机', rowspan: 1, colspan: 1},
+      c1: {value: '88', rowspan: 1, colspan: 1},
+      c2: {value: '0', rowspan: 1, colspan: 1},
+      c3: {value: '-30', rowspan: 1, colspan: 1},
+      c4: {value: '58.0', rowspan: 1, colspan: 1},
+      d1: {value: '104', rowspan: 1, colspan: 1},
+      d2: {value: '0', rowspan: 1, colspan: 1},
+      d3: {value: '0', rowspan: 1, colspan: 1},
+      d4: {value: '104.0', rowspan: 1, colspan: 1},
+      e1: {value: '73.2', rowspan: 1, colspan: 1},
+      e2: {value: '0', rowspan: 1, colspan: 1},
+      e3: {value: '0', rowspan: 1, colspan: 1},
+      e4: {value: '73.2', rowspan: 1, colspan: 1},
+      f1: {value: '80', rowspan: 1, colspan: 1},
+      f2: {value: '0', rowspan: 1, colspan: 1},
+      f3: {value: '0', rowspan: 1, colspan: 1},
+      f4: {value: '80.0', rowspan: 1, colspan: 1}
+    },
+    {
+      a: {value: '硬件业务板块', rowspan: 0, colspan: 1},
+      b: {value: '电视', rowspan: 1, colspan: 1},
+      c1: {value: '88', rowspan: 1, colspan: 1},
+      c2: {value: '0', rowspan: 1, colspan: 1},
+      c3: {value: '-30', rowspan: 1, colspan: 1},
+      c4: {value: '58.0', rowspan: 1, colspan: 1},
+      d1: {value: '104', rowspan: 1, colspan: 1},
+      d2: {value: '0', rowspan: 1, colspan: 1},
+      d3: {value: '0', rowspan: 1, colspan: 1},
+      d4: {value: '104.0', rowspan: 1, colspan: 1},
+      e1: {value: '73.2', rowspan: 1, colspan: 1},
+      e2: {value: '0', rowspan: 1, colspan: 1},
+      e3: {value: '0', rowspan: 1, colspan: 1},
+      e4: {value: '73.2', rowspan: 1, colspan: 1},
+      f1: {value: '80', rowspan: 1, colspan: 1},
+      f2: {value: '0', rowspan: 1, colspan: 1},
+      f3: {value: '0', rowspan: 1, colspan: 1},
+      f4: {value: '80.0', rowspan: 1, colspan: 1}
+    },
+    {
+      a: {value: '硬件业务板块', rowspan: 0, colspan: 1},
+      b: {value: '笔记本电脑', rowspan: 1, colspan: 1},
+      c1: {value: '88', rowspan: 1, colspan: 1},
+      c2: {value: '0', rowspan: 1, colspan: 1},
+      c3: {value: '-30', rowspan: 1, colspan: 1},
+      c4: {value: '58.0', rowspan: 1, colspan: 1},
+      d1: {value: '104', rowspan: 1, colspan: 1},
+      d2: {value: '0', rowspan: 1, colspan: 1},
+      d3: {value: '0', rowspan: 1, colspan: 1},
+      d4: {value: '104.0', rowspan: 1, colspan: 1},
+      e1: {value: '73.2', rowspan: 1, colspan: 1},
+      e2: {value: '0', rowspan: 1, colspan: 1},
+      e3: {value: '0', rowspan: 1, colspan: 1},
+      e4: {value: '73.2', rowspan: 1, colspan: 1},
+      f1: {value: '80', rowspan: 1, colspan: 1},
+      f2: {value: '0', rowspan: 1, colspan: 1},
+      f3: {value: '0', rowspan: 1, colspan: 1},
+      f4: {value: '80.0', rowspan: 1, colspan: 1}
+    },
+    {
+      a: {value: '硬件业务板块', rowspan: 0, colspan: 1},
+      b: {value: '智能硬件', rowspan: 1, colspan: 1},
+      c1: {value: '88', rowspan: 1, colspan: 1},
+      c2: {value: '0', rowspan: 1, colspan: 1},
+      c3: {value: '-30', rowspan: 1, colspan: 1},
+      c4: {value: '58.0', rowspan: 1, colspan: 1},
+      d1: {value: '104', rowspan: 1, colspan: 1},
+      d2: {value: '0', rowspan: 1, colspan: 1},
+      d3: {value: '0', rowspan: 1, colspan: 1},
+      d4: {value: '104.0', rowspan: 1, colspan: 1},
+      e1: {value: '73.2', rowspan: 1, colspan: 1},
+      e2: {value: '0', rowspan: 1, colspan: 1},
+      e3: {value: '0', rowspan: 1, colspan: 1},
+      e4: {value: '73.2', rowspan: 1, colspan: 1},
+      f1: {value: '80', rowspan: 1, colspan: 1},
+      f2: {value: '0', rowspan: 1, colspan: 1},
+      f3: {value: '0', rowspan: 1, colspan: 1},
+      f4: {value: '80.0', rowspan: 1, colspan: 1}
+    },
+    {
+      a: {value: '硬件业务板块', rowspan: 0, colspan: 1},
+      b: {value: '生态链', rowspan: 1, colspan: 1},
+      c1: {value: '88', rowspan: 1, colspan: 1},
+      c2: {value: '0', rowspan: 1, colspan: 1},
+      c3: {value: '-30', rowspan: 1, colspan: 1},
+      c4: {value: '58.0', rowspan: 1, colspan: 1},
+      d1: {value: '104', rowspan: 1, colspan: 1},
+      d2: {value: '0', rowspan: 1, colspan: 1},
+      d3: {value: '0', rowspan: 1, colspan: 1},
+      d4: {value: '104.0', rowspan: 1, colspan: 1},
+      e1: {value: '73.2', rowspan: 1, colspan: 1},
+      e2: {value: '0', rowspan: 1, colspan: 1},
+      e3: {value: '0', rowspan: 1, colspan: 1},
+      e4: {value: '73.2', rowspan: 1, colspan: 1},
+      f1: {value: '80', rowspan: 1, colspan: 1},
+      f2: {value: '0', rowspan: 1, colspan: 1},
+      f3: {value: '0', rowspan: 1, colspan: 1},
+      f4: {value: '80.0', rowspan: 1, colspan: 1}
+    },
+    {
+      a: {value: '互联网业务板块', rowspan: 5, colspan: 1},
+      b: {value: '互一', rowspan: 1, colspan: 1},
+      c1: {value: '88', rowspan: 1, colspan: 1},
+      c2: {value: '0', rowspan: 1, colspan: 1},
+      c3: {value: '-30', rowspan: 1, colspan: 1},
+      c4: {value: '58.0', rowspan: 1, colspan: 1},
+      d1: {value: '104', rowspan: 1, colspan: 1},
+      d2: {value: '0', rowspan: 1, colspan: 1},
+      d3: {value: '0', rowspan: 1, colspan: 1},
+      d4: {value: '104.0', rowspan: 1, colspan: 1},
+      e1: {value: '73.2', rowspan: 1, colspan: 1},
+      e2: {value: '0', rowspan: 1, colspan: 1},
+      e3: {value: '0', rowspan: 1, colspan: 1},
+      e4: {value: '73.2', rowspan: 1, colspan: 1},
+      f1: {value: '80', rowspan: 1, colspan: 1},
+      f2: {value: '0', rowspan: 1, colspan: 1},
+      f3: {value: '0', rowspan: 1, colspan: 1},
+      f4: {value: '80.0', rowspan: 1, colspan: 1}
+    },
+    {
+      a: {value: '互联网业务板块', rowspan: 0, colspan: 1},
+      b: {value: '互二', rowspan: 1, colspan: 1},
+      c1: {value: '88', rowspan: 1, colspan: 1},
+      c2: {value: '0', rowspan: 1, colspan: 1},
+      c3: {value: '-30', rowspan: 1, colspan: 1},
+      c4: {value: '58.0', rowspan: 1, colspan: 1},
+      d1: {value: '104', rowspan: 1, colspan: 1},
+      d2: {value: '0', rowspan: 1, colspan: 1},
+      d3: {value: '0', rowspan: 1, colspan: 1},
+      d4: {value: '104.0', rowspan: 1, colspan: 1},
+      e1: {value: '73.2', rowspan: 1, colspan: 1},
+      e2: {value: '0', rowspan: 1, colspan: 1},
+      e3: {value: '0', rowspan: 1, colspan: 1},
+      e4: {value: '73.2', rowspan: 1, colspan: 1},
+      f1: {value: '80', rowspan: 1, colspan: 1},
+      f2: {value: '0', rowspan: 1, colspan: 1},
+      f3: {value: '0', rowspan: 1, colspan: 1},
+      f4: {value: '80.0', rowspan: 4, colspan: 1}
+    },
+    {
+      a: {value: '互联网业务板块', rowspan: 0, colspan: 1},
+      b: {value: '互三', rowspan: 1, colspan: 1},
+      c1: {value: '88', rowspan: 1, colspan: 1},
+      c2: {value: '0', rowspan: 1, colspan: 1},
+      c3: {value: '-30', rowspan: 1, colspan: 1},
+      c4: {value: '58.0', rowspan: 1, colspan: 1},
+      d1: {value: '104', rowspan: 1, colspan: 1},
+      d2: {value: '0', rowspan: 1, colspan: 1},
+      d3: {value: '0', rowspan: 1, colspan: 1},
+      d4: {value: '104.0', rowspan: 1, colspan: 1},
+      e1: {value: '73.2', rowspan: 1, colspan: 1},
+      e2: {value: '0', rowspan: 1, colspan: 1},
+      e3: {value: '0', rowspan: 1, colspan: 1},
+      e4: {value: '73.2', rowspan: 1, colspan: 1},
+      f1: {value: '80', rowspan: 1, colspan: 1},
+      f2: {value: '0', rowspan: 1, colspan: 1},
+      f3: {value: '0', rowspan: 1, colspan: 1},
+      f4: {value: '80.0', rowspan: 0, colspan: 1}
+    },
+    {
+      a: {value: '互联网业务板块', rowspan: 0, colspan: 1},
+      b: {value: '互四', rowspan: 1, colspan: 1},
+      c1: {value: '88', rowspan: 1, colspan: 1},
+      c2: {value: '0', rowspan: 1, colspan: 1},
+      c3: {value: '-30', rowspan: 1, colspan: 1},
+      c4: {value: '58.0', rowspan: 1, colspan: 1},
+      d1: {value: '104', rowspan: 1, colspan: 1},
+      d2: {value: '0', rowspan: 1, colspan: 1},
+      d3: {value: '0', rowspan: 1, colspan: 1},
+      d4: {value: '104.0', rowspan: 1, colspan: 1},
+      e1: {value: '73.2', rowspan: 1, colspan: 1},
+      e2: {value: '0', rowspan: 1, colspan: 1},
+      e3: {value: '0', rowspan: 1, colspan: 1},
+      e4: {value: '73.2', rowspan: 1, colspan: 1},
+      f1: {value: '80', rowspan: 1, colspan: 1},
+      f2: {value: '0', rowspan: 1, colspan: 1},
+      f3: {value: '0', rowspan: 1, colspan: 1},
+      f4: {value: '80.0', rowspan: 0, colspan: 1}
+    },
+    {
+      a: {value: '互联网业务板块', rowspan: 0, colspan: 1},
+      b: {value: '互一', rowspan: 1, colspan: 1},
+      c1: {value: '88', rowspan: 1, colspan: 1},
+      c2: {value: '0', rowspan: 1, colspan: 1},
+      c3: {value: '-30', rowspan: 1, colspan: 1},
+      c4: {value: '58.0', rowspan: 1, colspan: 1},
+      d1: {value: '104', rowspan: 1, colspan: 1},
+      d2: {value: '0', rowspan: 1, colspan: 1},
+      d3: {value: '0', rowspan: 1, colspan: 1},
+      d4: {value: '104.0', rowspan: 1, colspan: 1},
+      e1: {value: '73.2', rowspan: 1, colspan: 1},
+      e2: {value: '0', rowspan: 1, colspan: 1},
+      e3: {value: '0', rowspan: 1, colspan: 1},
+      e4: {value: '73.2', rowspan: 1, colspan: 1},
+      f1: {value: '80', rowspan: 1, colspan: 1},
+      f2: {value: '0', rowspan: 1, colspan: 1},
+      f3: {value: '0', rowspan: 1, colspan: 1},
+      f4: {value: '80.0', rowspan: 0, colspan: 1}
+    }
+  ];
+
+  constructor(private com: CommonService) {
+    console.log('Welcome-Common:', this.com);
+  }
+
+  ngOnInit() {
+  }
+}
