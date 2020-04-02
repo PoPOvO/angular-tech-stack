@@ -1,0 +1,124 @@
+<form [formGroup]="form" nzLayout="vertical" nz-form>
+  <div nz-row>
+    <div nz-col nzSpan="6">
+      <nz-form-item>
+        <nz-form-label>{{'标题'}}</nz-form-label>
+        <nz-form-control nzErrorTip="该项必填" >
+          <input type="text" nz-input formControlName="title" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col nzOffset="3" nzSpan="6">
+      <nz-form-item>
+        <nz-form-label>{{'录入时间'}}</nz-form-label>
+        <nz-form-control nzErrorTip="该项必填">
+          <nz-date-picker [nzPlaceHolder]="'请选择'"
+                          formControlName="updateTime"
+                          nzFormat="yyyy-MM-dd HH:mm:ss"
+          >
+          </nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col nzOffset="3" nzSpan="6">
+      <nz-form-item>
+        <nz-form-label>{{'录入人'}}</nz-form-label>
+        <nz-form-control nzErrorTip="该项必填">
+          <input type="text" nz-input formControlName="updater" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <nz-form-item>
+    <nz-form-label>{{'信息表'}}</nz-form-label>
+    <nz-form-control>
+      <div formArrayName="subForms">
+        <nz-table #editRowTable nzBordered [nzData]="dataSet" nzFrontPagination="false">
+          <thead>
+          <tr>
+            <th nzWidth="10%">序号</th>
+            <th nzWidth="25%">姓名</th>
+            <th nzWidth="20%">年龄</th>
+            <th nzWidth="30%">地址</th>
+            <th nzWidth="15%">操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of editRowTable.data; let i = index">
+            <ng-container [formGroupName]="i">
+              <td>{{i}}</td>
+              <td>
+                <ng-container *ngIf="!editTable[i]; else nameInputTpl">
+                  {{ data.name }}
+                </ng-container>
+                <ng-template #nameInputTpl>
+                  <input type="text" nz-input formControlName="name" />
+                </ng-template>
+              </td>
+              <td>
+                <ng-container *ngIf="!editTable[i]; else ageInputTpl">
+                  {{ data.age }}
+                </ng-container>
+                <ng-template #ageInputTpl>
+                  <input type="text" nz-input formControlName="age" />
+                </ng-template>
+              </td>
+              <td>
+                <ng-container *ngIf="!editTable[i]; else addressInputTpl">
+                  {{ data.address }}
+                </ng-container>
+                <ng-template #addressInputTpl>
+                  <input type="text" nz-input formControlName="address"/>
+                </ng-template>
+              </td>
+              <td>
+                <div class="editable-row-operations">
+                  <ng-container *ngIf="!editTable[i]; else saveTpl">
+                    <a (click)="startEdit(i)">编辑</a>
+                  </ng-container>
+                  <ng-template #saveTpl>
+                    <a (click)="save(i)">保存</a>
+                  </ng-template>
+                </div>
+              </td>
+            </ng-container>
+          </tr>
+          </tbody>
+        </nz-table>
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <!--分析过程-->
+  <div nz-row>
+    <nz-form-label >{{'分析过程'}}</nz-form-label>
+    <!--已完成评论-->
+    <nz-list *ngIf="commentDataSet.length" [nzDataSource]="commentDataSet" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+      <ng-template #item let-item>
+        <nz-comment [nzAuthor]="item.name" [nzDatetime]="item.displayTime | date:'yyyy-MM-dd HH:mm:ss'">
+          <nz-comment-content>
+            <p>{{ item.content }}</p>
+          </nz-comment-content>
+        </nz-comment>
+      </ng-template>
+    </nz-list>
+
+    <!--待完成评论-->
+    <nz-comment>
+      <nz-comment-content>
+        <nz-form-item>
+          <textarea [placeholder]="'请输入'" style="resize:none;"
+                    formControlName="comment"
+                    nz-input rows="4"></textarea>
+        </nz-form-item>
+      </nz-comment-content>
+    </nz-comment>
+  </div>
+</form>
+<div nz-row style="float: right;">
+  <button nz-button nzType="primary" [disabled]="form.invalid" (click)="submit()">{{"提交"}}</button>
+</div>

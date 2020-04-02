@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostListener, Input} from '@angular/core';
+import {Directive, ElementRef, HostBinding, HostListener, Input} from '@angular/core';
 
 /**
  * 属性性指令：
@@ -10,6 +10,13 @@ import {Directive, ElementRef, HostListener, Input} from '@angular/core';
 export class HighlightDirective {
   @Input('appHighlight')
   highlightColor: string;
+  // @HostBinding('attr.name')
+  // name = 'name';
+  //
+  // @HostBinding('attr.test')
+  // get test() {
+  //   return 'test';
+  // }
 
   constructor(private el: ElementRef) {
     console.log("EL:", el);

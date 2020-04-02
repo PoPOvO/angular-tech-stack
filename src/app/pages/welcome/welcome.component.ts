@@ -1,290 +1,300 @@
 import { Component, OnInit } from '@angular/core';
-import {CommonService} from '../../service/common.service';
+import {NzFormatEmitEvent} from 'ng-zorro-antd';
+import {HelloService} from '../../service/hello.service';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import * as fileSaver from 'file-saver';
+import {saveOutputToFile} from 'source-map-explorer/dist/output';
 
+/**
+ * 可编辑table，响应式表单方式
+ */
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
-  // 表头key
-  headList = [
-    'a',
-    'b',
-    'c1',
-    'c2',
-    'c3',
-    'c4',
-    'd1',
-    'd2',
-    'd3',
-    'd4',
-    'e1',
-    'e2',
-    'e3',
-    'e4',
-    'f1',
-    'f2',
-    'f3',
-    'f4'
-  ];
+  exportLoading1 = false;
 
-  // 表头数据
-  tableHead1 = [
+  exportLoading2 = false;
+
+  exportLoading3 = false;
+
+  defaultCheckedKeys = ['0-1-0-0'];
+
+  nodes2 = [
     {
-      a: {value: '业务板块', rowspan: 2, colspan: 1},
-      b: {value: '业务部门', rowspan: 2, colspan: 1},
-      c1: {value: '2019年4月', rowspan: 1, colspan: 4},
-      c2: {value: '', rowspan: 1, colspan: 0},
-      c3: {value: '', rowspan: 1, colspan: 0},
-      c4: {value: '', rowspan: 1, colspan: 0},
-      d1: {value: '2019年3月', rowspan: 1, colspan: 4},
-      d2: {value: '', rowspan: 1, colspan: 0},
-      d3: {value: '', rowspan: 1, colspan: 0},
-      d4: {value: '', rowspan: 1, colspan: 0},
-      e1: {value: '2019年2月', rowspan: 1, colspan: 4},
-      e2: {value: '', rowspan: 1, colspan: 0},
-      e3: {value: '', rowspan: 1, colspan: 0},
-      e4: {value: '', rowspan: 1, colspan: 0},
-      f1: {value: '2019年1月', rowspan: 1, colspan: 4},
-      f2: {value: '', rowspan: 1, colspan: 0},
-      f3: {value: '', rowspan: 1, colspan: 0},
-      f4: {value: '', rowspan: 1, colspan: 0}
+      children: [
+        {
+          checked: false,
+          children: [],
+          expanded: false,
+          isLeaf: false,
+          key: 11,
+          title: "节点1-1"
+        },
+        {
+          checked: true,
+          children: [],
+          expanded: false,
+          isLeaf: false,
+          key: 12,
+          title: "节点1-2"
+        }
+      ],
+      expanded: false,
+      isLeaf: false,
+      key: 1,
+      title: "节点1"
     },
     {
-      a: {value: '业务板块', rowspan: 0, colspan: 1},
-      b: {value: '业务部门', rowspan: 0, colspan: 1},
-      c1: {value: '质量指标', rowspan: 1, colspan: 1},
-      c2: {value: '质量加分', rowspan: 1, colspan: 1},
-      c3: {value: '质量事故', rowspan: 1, colspan: 1},
-      c4: {value: '总分', rowspan: 1, colspan: 1},
-      d1: {value: '质量指标', rowspan: 1, colspan: 1},
-      d2: {value: '质量加分', rowspan: 1, colspan: 1},
-      d3: {value: '质量事故', rowspan: 1, colspan: 1},
-      d4: {value: '总分', rowspan: 1, colspan: 1},
-      e1: {value: '质量指标', rowspan: 1, colspan: 1},
-      e2: {value: '质量加分', rowspan: 1, colspan: 1},
-      e3: {value: '质量事故', rowspan: 1, colspan: 1},
-      e4: {value: '总分', rowspan: 1, colspan: 1},
-      f1: {value: '质量指标', rowspan: 1, colspan: 1},
-      f2: {value: '质量加分', rowspan: 1, colspan: 1},
-      f3: {value: '质量事故', rowspan: 1, colspan: 1},
-      f4: {value: '总分', rowspan: 1, colspan: 1}
+      checked: true,
+      children: [
+        {
+          checked: true,
+          children: [],
+          expanded: false,
+          isLeaf: false,
+          key: 21,
+          title: "节点2-1"
+        },
+        {
+          checked: true,
+          children: [],
+          expanded: false,
+          isLeaf: false,
+          key: 22,
+          title: "节点2-2"
+        }
+      ],
+      expanded: false,
+      isLeaf: false,
+      key: 1,
+      title: "节点1"
     }
   ];
 
-  // rowspan影响当前列上的table元素；colspan影响当前行上的table元素
-  // 如果要进行rowspan，那么要修改当前列上table元素对象的rowspan属性；
-  // 例如当前元素需要rowspan = 3，那么需要修改当前列上的table元素的rowspan=0.
-  // 如果要进行colspan，那么要修改当前行上table元素对象的colspan属性；
-  // 例如当前元素需要colspan = 3，那么需要修改当前列上的table元素的colspan=0.
-  dateSetElse = [
+  nodes1 = [
     {
-      a: {value: '硬件业务板块', rowspan: 5, colspan: 1},
-      b: {value: '手机', rowspan: 1, colspan: 1},
-      c1: {value: '88', rowspan: 1, colspan: 1},
-      c2: {value: '0', rowspan: 1, colspan: 1},
-      c3: {value: '-30', rowspan: 1, colspan: 1},
-      c4: {value: '58.0', rowspan: 1, colspan: 1},
-      d1: {value: '104', rowspan: 1, colspan: 1},
-      d2: {value: '0', rowspan: 1, colspan: 1},
-      d3: {value: '0', rowspan: 1, colspan: 1},
-      d4: {value: '104.0', rowspan: 1, colspan: 1},
-      e1: {value: '73.2', rowspan: 1, colspan: 1},
-      e2: {value: '0', rowspan: 1, colspan: 1},
-      e3: {value: '0', rowspan: 1, colspan: 1},
-      e4: {value: '73.2', rowspan: 1, colspan: 1},
-      f1: {value: '80', rowspan: 1, colspan: 1},
-      f2: {value: '0', rowspan: 1, colspan: 1},
-      f3: {value: '0', rowspan: 1, colspan: 1},
-      f4: {value: '80.0', rowspan: 1, colspan: 1}
+      title: '0-0',
+      key: '0-0',
+      expanded: true,
+      children: [
+        {
+          title: '0-0-0',
+          key: '0-0-0',
+          children: [
+            { title: '0-0-0-0', key: '0-0-0-0', isLeaf: true },
+            { title: '0-0-0-1', key: '0-0-0-1', isLeaf: true },
+            { title: '0-0-0-2', key: '0-0-0-2', isLeaf: true }
+          ]
+        },
+        {
+          title: '0-0-1',
+          key: '0-0-1',
+          children: [
+            { title: '0-0-1-0', key: '0-0-1-0', isLeaf: true},
+            { title: '0-0-1-1', key: '0-0-1-1', isLeaf: true },
+            { title: '0-0-1-2', key: '0-0-1-2', isLeaf: true }
+          ]
+        },
+        {
+          title: '0-0-2',
+          key: '0-0-2',
+          isLeaf: true
+        }
+      ]
     },
     {
-      a: {value: '硬件业务板块', rowspan: 0, colspan: 1},
-      b: {value: '电视', rowspan: 1, colspan: 1},
-      c1: {value: '88', rowspan: 1, colspan: 1},
-      c2: {value: '0', rowspan: 1, colspan: 1},
-      c3: {value: '-30', rowspan: 1, colspan: 1},
-      c4: {value: '58.0', rowspan: 1, colspan: 1},
-      d1: {value: '104', rowspan: 1, colspan: 1},
-      d2: {value: '0', rowspan: 1, colspan: 1},
-      d3: {value: '0', rowspan: 1, colspan: 1},
-      d4: {value: '104.0', rowspan: 1, colspan: 1},
-      e1: {value: '73.2', rowspan: 1, colspan: 1},
-      e2: {value: '0', rowspan: 1, colspan: 1},
-      e3: {value: '0', rowspan: 1, colspan: 1},
-      e4: {value: '73.2', rowspan: 1, colspan: 1},
-      f1: {value: '80', rowspan: 1, colspan: 1},
-      f2: {value: '0', rowspan: 1, colspan: 1},
-      f3: {value: '0', rowspan: 1, colspan: 1},
-      f4: {value: '80.0', rowspan: 1, colspan: 1}
+      title: '0-1',
+      key: '0-1',
+      children: [
+        { title: '0-1-0-0', key: '0-1-0-0', isLeaf: true },
+        { title: '0-1-0-1', key: '0-1-0-1', isLeaf: true, checked: true },
+        { title: '0-1-0-2', key: '0-1-0-2', isLeaf: true, checked: true }
+      ]
     },
     {
-      a: {value: '硬件业务板块', rowspan: 0, colspan: 1},
-      b: {value: '笔记本电脑', rowspan: 1, colspan: 1},
-      c1: {value: '88', rowspan: 1, colspan: 1},
-      c2: {value: '0', rowspan: 1, colspan: 1},
-      c3: {value: '-30', rowspan: 1, colspan: 1},
-      c4: {value: '58.0', rowspan: 1, colspan: 1},
-      d1: {value: '104', rowspan: 1, colspan: 1},
-      d2: {value: '0', rowspan: 1, colspan: 1},
-      d3: {value: '0', rowspan: 1, colspan: 1},
-      d4: {value: '104.0', rowspan: 1, colspan: 1},
-      e1: {value: '73.2', rowspan: 1, colspan: 1},
-      e2: {value: '0', rowspan: 1, colspan: 1},
-      e3: {value: '0', rowspan: 1, colspan: 1},
-      e4: {value: '73.2', rowspan: 1, colspan: 1},
-      f1: {value: '80', rowspan: 1, colspan: 1},
-      f2: {value: '0', rowspan: 1, colspan: 1},
-      f3: {value: '0', rowspan: 1, colspan: 1},
-      f4: {value: '80.0', rowspan: 1, colspan: 1}
-    },
-    {
-      a: {value: '硬件业务板块', rowspan: 0, colspan: 1},
-      b: {value: '智能硬件', rowspan: 1, colspan: 1},
-      c1: {value: '88', rowspan: 1, colspan: 1},
-      c2: {value: '0', rowspan: 1, colspan: 1},
-      c3: {value: '-30', rowspan: 1, colspan: 1},
-      c4: {value: '58.0', rowspan: 1, colspan: 1},
-      d1: {value: '104', rowspan: 1, colspan: 1},
-      d2: {value: '0', rowspan: 1, colspan: 1},
-      d3: {value: '0', rowspan: 1, colspan: 1},
-      d4: {value: '104.0', rowspan: 1, colspan: 1},
-      e1: {value: '73.2', rowspan: 1, colspan: 1},
-      e2: {value: '0', rowspan: 1, colspan: 1},
-      e3: {value: '0', rowspan: 1, colspan: 1},
-      e4: {value: '73.2', rowspan: 1, colspan: 1},
-      f1: {value: '80', rowspan: 1, colspan: 1},
-      f2: {value: '0', rowspan: 1, colspan: 1},
-      f3: {value: '0', rowspan: 1, colspan: 1},
-      f4: {value: '80.0', rowspan: 1, colspan: 1}
-    },
-    {
-      a: {value: '硬件业务板块', rowspan: 0, colspan: 1},
-      b: {value: '生态链', rowspan: 1, colspan: 1},
-      c1: {value: '88', rowspan: 1, colspan: 1},
-      c2: {value: '0', rowspan: 1, colspan: 1},
-      c3: {value: '-30', rowspan: 1, colspan: 1},
-      c4: {value: '58.0', rowspan: 1, colspan: 1},
-      d1: {value: '104', rowspan: 1, colspan: 1},
-      d2: {value: '0', rowspan: 1, colspan: 1},
-      d3: {value: '0', rowspan: 1, colspan: 1},
-      d4: {value: '104.0', rowspan: 1, colspan: 1},
-      e1: {value: '73.2', rowspan: 1, colspan: 1},
-      e2: {value: '0', rowspan: 1, colspan: 1},
-      e3: {value: '0', rowspan: 1, colspan: 1},
-      e4: {value: '73.2', rowspan: 1, colspan: 1},
-      f1: {value: '80', rowspan: 1, colspan: 1},
-      f2: {value: '0', rowspan: 1, colspan: 1},
-      f3: {value: '0', rowspan: 1, colspan: 1},
-      f4: {value: '80.0', rowspan: 1, colspan: 1}
-    },
-    {
-      a: {value: '互联网业务板块', rowspan: 5, colspan: 1},
-      b: {value: '互一', rowspan: 1, colspan: 1},
-      c1: {value: '88', rowspan: 1, colspan: 1},
-      c2: {value: '0', rowspan: 1, colspan: 1},
-      c3: {value: '-30', rowspan: 1, colspan: 1},
-      c4: {value: '58.0', rowspan: 1, colspan: 1},
-      d1: {value: '104', rowspan: 1, colspan: 1},
-      d2: {value: '0', rowspan: 1, colspan: 1},
-      d3: {value: '0', rowspan: 1, colspan: 1},
-      d4: {value: '104.0', rowspan: 1, colspan: 1},
-      e1: {value: '73.2', rowspan: 1, colspan: 1},
-      e2: {value: '0', rowspan: 1, colspan: 1},
-      e3: {value: '0', rowspan: 1, colspan: 1},
-      e4: {value: '73.2', rowspan: 1, colspan: 1},
-      f1: {value: '80', rowspan: 1, colspan: 1},
-      f2: {value: '0', rowspan: 1, colspan: 1},
-      f3: {value: '0', rowspan: 1, colspan: 1},
-      f4: {value: '80.0', rowspan: 1, colspan: 1}
-    },
-    {
-      a: {value: '互联网业务板块', rowspan: 0, colspan: 1},
-      b: {value: '互二', rowspan: 1, colspan: 1},
-      c1: {value: '88', rowspan: 1, colspan: 1},
-      c2: {value: '0', rowspan: 1, colspan: 1},
-      c3: {value: '-30', rowspan: 1, colspan: 1},
-      c4: {value: '58.0', rowspan: 1, colspan: 1},
-      d1: {value: '104', rowspan: 1, colspan: 1},
-      d2: {value: '0', rowspan: 1, colspan: 1},
-      d3: {value: '0', rowspan: 1, colspan: 1},
-      d4: {value: '104.0', rowspan: 1, colspan: 1},
-      e1: {value: '73.2', rowspan: 1, colspan: 1},
-      e2: {value: '0', rowspan: 1, colspan: 1},
-      e3: {value: '0', rowspan: 1, colspan: 1},
-      e4: {value: '73.2', rowspan: 1, colspan: 1},
-      f1: {value: '80', rowspan: 1, colspan: 1},
-      f2: {value: '0', rowspan: 1, colspan: 1},
-      f3: {value: '0', rowspan: 1, colspan: 1},
-      f4: {value: '80.0', rowspan: 4, colspan: 1}
-    },
-    {
-      a: {value: '互联网业务板块', rowspan: 0, colspan: 1},
-      b: {value: '互三', rowspan: 1, colspan: 1},
-      c1: {value: '88', rowspan: 1, colspan: 1},
-      c2: {value: '0', rowspan: 1, colspan: 1},
-      c3: {value: '-30', rowspan: 1, colspan: 1},
-      c4: {value: '58.0', rowspan: 1, colspan: 1},
-      d1: {value: '104', rowspan: 1, colspan: 1},
-      d2: {value: '0', rowspan: 1, colspan: 1},
-      d3: {value: '0', rowspan: 1, colspan: 1},
-      d4: {value: '104.0', rowspan: 1, colspan: 1},
-      e1: {value: '73.2', rowspan: 1, colspan: 1},
-      e2: {value: '0', rowspan: 1, colspan: 1},
-      e3: {value: '0', rowspan: 1, colspan: 1},
-      e4: {value: '73.2', rowspan: 1, colspan: 1},
-      f1: {value: '80', rowspan: 1, colspan: 1},
-      f2: {value: '0', rowspan: 1, colspan: 1},
-      f3: {value: '0', rowspan: 1, colspan: 1},
-      f4: {value: '80.0', rowspan: 0, colspan: 1}
-    },
-    {
-      a: {value: '互联网业务板块', rowspan: 0, colspan: 1},
-      b: {value: '互四', rowspan: 1, colspan: 1},
-      c1: {value: '88', rowspan: 1, colspan: 1},
-      c2: {value: '0', rowspan: 1, colspan: 1},
-      c3: {value: '-30', rowspan: 1, colspan: 1},
-      c4: {value: '58.0', rowspan: 1, colspan: 1},
-      d1: {value: '104', rowspan: 1, colspan: 1},
-      d2: {value: '0', rowspan: 1, colspan: 1},
-      d3: {value: '0', rowspan: 1, colspan: 1},
-      d4: {value: '104.0', rowspan: 1, colspan: 1},
-      e1: {value: '73.2', rowspan: 1, colspan: 1},
-      e2: {value: '0', rowspan: 1, colspan: 1},
-      e3: {value: '0', rowspan: 1, colspan: 1},
-      e4: {value: '73.2', rowspan: 1, colspan: 1},
-      f1: {value: '80', rowspan: 1, colspan: 1},
-      f2: {value: '0', rowspan: 1, colspan: 1},
-      f3: {value: '0', rowspan: 1, colspan: 1},
-      f4: {value: '80.0', rowspan: 0, colspan: 1}
-    },
-    {
-      a: {value: '互联网业务板块', rowspan: 0, colspan: 1},
-      b: {value: '互一', rowspan: 1, colspan: 1},
-      c1: {value: '88', rowspan: 1, colspan: 1},
-      c2: {value: '0', rowspan: 1, colspan: 1},
-      c3: {value: '-30', rowspan: 1, colspan: 1},
-      c4: {value: '58.0', rowspan: 1, colspan: 1},
-      d1: {value: '104', rowspan: 1, colspan: 1},
-      d2: {value: '0', rowspan: 1, colspan: 1},
-      d3: {value: '0', rowspan: 1, colspan: 1},
-      d4: {value: '104.0', rowspan: 1, colspan: 1},
-      e1: {value: '73.2', rowspan: 1, colspan: 1},
-      e2: {value: '0', rowspan: 1, colspan: 1},
-      e3: {value: '0', rowspan: 1, colspan: 1},
-      e4: {value: '73.2', rowspan: 1, colspan: 1},
-      f1: {value: '80', rowspan: 1, colspan: 1},
-      f2: {value: '0', rowspan: 1, colspan: 1},
-      f3: {value: '0', rowspan: 1, colspan: 1},
-      f4: {value: '80.0', rowspan: 0, colspan: 1}
+      title: '0-2',
+      key: '0-2',
+      isLeaf: true
     }
   ];
 
-  constructor(private com: CommonService) {
-    console.log('Welcome-Common:', this.com);
+  nodes = [
+    {
+      title: '0-0',
+      key: '0-0',
+      expanded: true,
+      children: [
+        {
+          title: '0-0-0',
+          key: '0-0-0',
+          children: [
+            { title: '0-0-0-0', key: '0-0-0-0', isLeaf: true },
+            { title: '0-0-0-1', key: '0-0-0-1', isLeaf: true },
+            { title: '0-0-0-2', key: '0-0-0-2', isLeaf: true }
+          ]
+        },
+        {
+          title: '0-0-1',
+          key: '0-0-1',
+          children: [
+            { title: '0-0-1-0', key: '0-0-1-0', isLeaf: true },
+            { title: '0-0-1-1', key: '0-0-1-1', isLeaf: true },
+            { title: '0-0-1-2', key: '0-0-1-2', isLeaf: true }
+          ]
+        },
+        {
+          title: '0-0-2',
+          key: '0-0-2',
+          isLeaf: true
+        }
+      ]
+    },
+    {
+      title: '0-1',
+      key: '0-1',
+      children: [
+        { title: '0-1-0-0', key: '0-1-0-0', isLeaf: true },
+        { title: '0-1-0-1', key: '0-1-0-1', isLeaf: true },
+        { title: '0-1-0-2', key: '0-1-0-2', isLeaf: true }
+      ]
+    },
+    {
+      title: '0-2',
+      key: '0-2',
+      isLeaf: true
+    }
+  ];
+
+  nzEvent(event: NzFormatEmitEvent): void {
+    console.log(event);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.helloService.hello().subscribe((res: any) => {
+      console.log('测试通信', res);
+    });
   }
+
+  // 使用file-save库，浏览器都支持
+  fileDownLoad1() {
+    const url = '/api/file/download';
+    this.exportLoading1 = true;
+    this.http.get(url, {
+      observe: 'response',
+      responseType: 'arraybuffer'
+    }).subscribe(
+      (res: any) => {
+        let fileName = res.headers.get('Content-Disposition').match(/filename=([^;]+)/);
+        const contentType = res.headers.get('Content-Type');
+        fileName = fileName && fileName.length > 0 ? fileName[1] : null;
+        fileName = fileName ? decodeURI(escape(fileName)) : null; // 先ISO-8859-1编码，再utf8解码
+        const blob = new Blob([res.body], { type : contentType ? contentType : 'application/octet-stream' });
+        fileSaver.saveAs(blob, fileName ? fileName : 'download');
+        this.exportLoading1 = false;
+      },
+      e => {
+        console.log('错误', e);
+        this.exportLoading1 = false;
+      }
+    );
+    // const url = '/api/file/download';
+    // this.exportLoading1 = true;
+    // this.http.get(url, {
+    //   observe: 'response',
+    //   responseType: 'blob'
+    // }).subscribe(
+    //   (res: any) => {
+    //     let fileName = res.headers.get('Content-Disposition').match(/filename=([^;]+)/);
+    //     fileName = fileName && fileName.length > 0 ? fileName[1] : null;
+    //     fileName = fileName ? decodeURI(escape(fileName)) : null; // 先ISO-8859-1编码，再utf8解码
+    //     fileSaver.saveAs(res.body, fileName);
+    //     this.exportLoading1 = false;
+    //   },
+    //   e => {
+    //     console.log('错误', e);
+    //     this.exportLoading1 = false;
+    //   }
+    // );
+  }
+
+  // firefox正常；webkit内核浏览器（Chrome，360）未能识别到filename
+  fileDownLoad2() {
+    const url = '/api/file/download';
+    this.exportLoading2 = true;
+    this.http.get(url, {
+      observe: 'response',
+      responseType: 'arraybuffer'
+    }).subscribe(
+      (res: any) => {
+        let fileName = res.headers.get('Content-Disposition').match(/filename=([^;]+)/);
+        const contentType = res.headers.get('Content-Type');
+        fileName = fileName && fileName.length > 0 ? fileName[1] : null;
+        fileName = fileName ? decodeURI(escape(fileName)) : null; // 先ISO-8859-1编码，再utf8解码
+        const file = new File([res.body], fileName, { type: contentType ? contentType : 'application/octet-stream' });
+        const downloadUrl = window.URL.createObjectURL(file);
+        window.open(downloadUrl, '_self');
+        this.exportLoading2 = false;
+      },
+      e => {
+        console.log('错误', e);
+        this.exportLoading2 = false;
+      }
+    );
+  }
+
+  // 使用<a>元素的特点，等于发起一次get请求，并且可以使用<a>元素的download属性设置文件名，替代window.open()方式
+  fileDownLoad3() {
+    const url = '/api/file/download';
+    this.exportLoading3 = true;
+    this.http.get(url, {
+      observe: 'response',
+      responseType: 'arraybuffer'
+    }).subscribe(
+      (res: any) => {
+        const link = document.createElement('a');
+        let fileName = res.headers.get('Content-Disposition').match(/filename=([^;]+)/);
+        const contentType = res.headers.get('Content-Type');
+        fileName = fileName && fileName.length > 0 ? fileName[1] : null;
+        fileName = fileName ? decodeURI(escape(fileName)) : null; // 先ISO-8859-1编码，再utf8解码
+        const blob = new Blob([res.body], { type: contentType ? contentType : 'application/octet-stream' });
+        link.setAttribute('href', window.URL.createObjectURL(blob));
+        link.setAttribute('download', fileName ? fileName : 'download');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        this.exportLoading3 = false;
+      },
+      e => {
+        console.log('错误', e);
+        this.exportLoading2 = false;
+      }
+    );
+  }
+
+  // 本地下载
+  fileDownLoad4() {
+    const url = '/api/hello';
+    this.http.get<HttpResponse<Blob>>(url, {
+      observe: 'response',
+      responseType: 'blob' as 'json'
+    }).subscribe(
+      (res: any) => {
+        const contentType = res.headers.get('Content-Type');
+        const blob = new Blob([res.body],{ type: contentType ? contentType : 'application/octet-stream' });
+        fileSaver.saveAs(blob, 'test.txt');
+      },
+      e => {
+        console.log('错误', e);
+      }
+    );
+  }
+
+  constructor(
+    private helloService: HelloService,
+    private http: HttpClient
+  ) {}
 }

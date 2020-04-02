@@ -15,6 +15,6 @@ import {ShareModule} from '../../share/share.module';
 })
 export class WelcomeModule {
   constructor() {
-    console.log("WWW");
+    console.log("WelcomeModule 初始化");
   }
 }

@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
  * 对数字求pow次方
  */
 @Pipe({
-  name: 'numberPow'
+  name: 'numberPow',
 })
 export class NumberPowPipe implements PipeTransform {
   transform(value: any, pow?: number): any {

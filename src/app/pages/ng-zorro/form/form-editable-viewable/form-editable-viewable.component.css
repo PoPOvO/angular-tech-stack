@@ -1,0 +1,18 @@
+.view-font {
+  color: #888;
+  font-size: 14px;
+}
+
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+:host ::ng-deep .ant-calendar-picker {
+  width: 100%;
+}
+
+:host ::ng-deep p {
+  margin-bottom: 8px;
+}

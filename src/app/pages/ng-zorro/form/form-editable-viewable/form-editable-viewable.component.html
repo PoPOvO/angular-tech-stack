@@ -1,0 +1,304 @@
+<div>
+  <form nz-form nzLayout="vertical" [formGroup]="form">
+    <div nz-row>
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label>{{'问题归属一级'}}</nz-form-label>
+          <nz-form-control nzErrorTip="该项必填" *ngIf="edit; else problemFirstBelongContent">
+            <nz-select
+              nzAllowClear
+              nzShowSearch
+              formControlName="problemFirstBelong"
+              [nzPlaceHolder]="'请选择'"
+            >
+              <ng-container *ngFor="let item of options">
+                <nz-option [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
+              </ng-container>
+            </nz-select>
+          </nz-form-control>
+          <ng-template #problemFirstBelongContent>
+            <nz-form-text>
+              <p class="view-font" nz-paragraph nzEllipsis nz-tooltip
+                 nzTooltipPlacement="topLeft"
+                 [nzTooltipTitle]="getFormValue('problemFirstBelong', options)">
+                {{getFormValue('problemFirstBelong', options)}}
+              </p>
+            </nz-form-text>
+          </ng-template>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="6" nzOffset="3">
+        <nz-form-item>
+          <nz-form-label>{{'问题归属二级'}}</nz-form-label>
+          <nz-form-control nzErrorTip="该项必填" *ngIf="edit; else problemSecondBelongContent">
+            <nz-select
+              nzAllowClear
+              nzShowSearch
+              formControlName="problemSecondBelong"
+              [nzPlaceHolder]="'请选择'"
+            >
+              <ng-container *ngFor="let item of options">
+                <nz-option [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
+              </ng-container>
+            </nz-select>
+          </nz-form-control>
+          <ng-template #problemSecondBelongContent>
+            <nz-form-text>
+              <p class="view-font" nz-paragraph nzEllipsis nz-tooltip
+                 nzTooltipPlacement="topLeft"
+                 [nzTooltipTitle]="getFormValue('problemSecondBelong', options)">
+                {{getFormValue('problemSecondBelong', options)}}
+              </p>
+            </nz-form-text>
+          </ng-template>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="6" nzOffset="3">
+        <nz-form-item>
+          <nz-form-label>{{'有条件关闭'}}</nz-form-label>
+          <nz-form-control nzErrorTip="该项必填" *ngIf="edit; else conditionCloseContent">
+            <nz-select
+              nzAllowClear
+              nzShowSearch
+              formControlName="conditionClose"
+              [nzPlaceHolder]="'请选择'"
+            >
+              <nz-option [nzLabel]="'是'" [nzValue]="1"></nz-option>
+              <nz-option [nzLabel]="'否'" [nzValue]="0"></nz-option>
+            </nz-select>
+          </nz-form-control>
+          <ng-template #conditionCloseContent>
+            <nz-form-text>
+              <p class="view-font" nz-paragraph nzEllipsis nz-tooltip
+                 nzTooltipPlacement="topLeft"
+                 [nzTooltipTitle]="form.get('conditionClose').value === null ? '-' : (form.get('conditionClose').value === 1 ? '是' : '否')">
+                {{form.get('conditionClose').value === null ? '-' : (form.get('conditionClose').value === 1 ? '是' : '否')}}
+              </p>
+            </nz-form-text>
+          </ng-template>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row>
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label>{{'是否为NDF'}}</nz-form-label>
+          <nz-form-control nzErrorTip="该项必填" *ngIf="edit; else ndfContent">
+            <nz-select
+              nzAllowClear
+              nzShowSearch
+              formControlName="ndf"
+              [nzPlaceHolder]="'请选择'"
+            >
+              <nz-option [nzLabel]="'是'" [nzValue]="1"></nz-option>
+              <nz-option [nzLabel]="'否'" [nzValue]="0"></nz-option>
+            </nz-select>
+          </nz-form-control>
+          <ng-template #ndfContent>
+            <nz-form-text>
+              <p class="view-font" nz-paragraph nzEllipsis nz-tooltip
+                 nzTooltipPlacement="topLeft"
+                 [nzTooltipTitle]="(form.get('ndf').value === null) ? '-' : (form.get('ndf').value === 1) ? '是' : '否'">
+                {{(form.get('ndf').value === null) ? '-' : (form.get('ndf').value === 1) ? '是' : '否'}}
+              </p>
+            </nz-form-text>
+          </ng-template>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="6" nzOffset="3">
+        <nz-form-item>
+          <nz-form-label>{{'NDF描述'}}</nz-form-label>
+          <nz-form-control nzErrorTip="该项必填" *ngIf="edit; else ndfDescContent">
+            <input nz-input
+                   id='ndfDesc'
+                   autocomplete="on"
+                   formControlName="ndfDesc"
+                   [placeholder]="'请输入'"/>
+          </nz-form-control>
+          <ng-template #ndfDescContent>
+            <nz-form-text>
+              <p class="view-font" nz-paragraph nzEllipsis nz-tooltip
+                 nzTooltipPlacement="topLeft"
+                 [nzTooltipTitle]="form.get('ndfDesc').value ? form.get('ndfDesc').value : '-'">
+                {{form.get('ndfDesc').value ? form.get('ndfDesc').value : '-'}}
+              </p>
+            </nz-form-text>
+          </ng-template>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="6" nzOffset="3">
+        <nz-form-item>
+          <nz-form-label>{{'改善对策SN'}}</nz-form-label>
+          <nz-form-control nzErrorTip="该项必填" *ngIf="edit; else improvementSnContent">
+            <input nz-input
+                   id='improvementSn'
+                   autocomplete="on"
+                   formControlName="improvementSn"
+                   [placeholder]="'请输入'"/>
+          </nz-form-control>
+          <ng-template #improvementSnContent>
+            <nz-form-text>
+              <p class="view-font" nz-paragraph nzEllipsis nz-tooltip
+                 nzTooltipPlacement="topLeft"
+                 [nzTooltipTitle]="form.get('improvementSn').value ? form.get('improvementSn').value : '-'">
+                {{form.get('improvementSn').value ? form.get('improvementSn').value : '-'}}
+              </p>
+            </nz-form-text>
+          </ng-template>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row>
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label>{{'根因提炼'}}</nz-form-label>
+          <nz-form-control nzErrorTip="该项必填" *ngIf="edit; else extractionRootContent">
+            <input nz-input
+                   id='extractionRoot'
+                   autocomplete="on"
+                   formControlName="extractionRoot"
+                   [placeholder]="'请输入'"/>
+          </nz-form-control>
+          <ng-template #extractionRootContent>
+            <nz-form-text>
+              <p class="view-font" nz-paragraph nzEllipsis nz-tooltip
+                 nzTooltipPlacement="topLeft"
+                 [nzTooltipTitle]="form.get('extractionRoot').value ? form.get('extractionRoot').value : '-'">
+                {{form.get('extractionRoot').value ? form.get('extractionRoot').value : '-'}}
+              </p>
+            </nz-form-text>
+          </ng-template>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="6" nzOffset="3">
+        <nz-form-item>
+          <nz-form-label>{{'责任部门'}}</nz-form-label>
+          <nz-form-control nzErrorTip="该项必填" *ngIf="edit; else responsibilityDeptContent">
+            <nz-select
+              nzAllowClear
+              nzShowSearch
+              formControlName="responsibilityDept"
+              [nzPlaceHolder]="'请选择'"
+            >
+              <ng-container *ngFor="let item of options">
+                <nz-option [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
+              </ng-container>
+            </nz-select>
+          </nz-form-control>
+          <ng-template #responsibilityDeptContent>
+            <nz-form-text>
+              <p class="view-font" nz-paragraph nzEllipsis nz-tooltip
+                 nzTooltipPlacement="topLeft"
+                 [nzTooltipTitle]="getFormValue('responsibilityDept', options)">
+                {{getFormValue('responsibilityDept', options)}}
+              </p>
+            </nz-form-text>
+          </ng-template>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="6" nzOffset="3">
+        <nz-form-item>
+          <nz-form-label>{{'责任人'}}</nz-form-label>
+          <nz-form-control nzErrorTip="该项必填">
+            <input nz-input
+                   *ngIf="edit; else responsibilityPersonIdContent"
+                   formControlName="responsibilityPersonId"
+                   [placeholder]="'请输入'"/>
+            <ng-template #responsibilityPersonIdContent>
+              <nz-form-text>
+                <p class="view-font" nz-paragraph nzEllipsis nz-tooltip
+                   nzTooltipPlacement="topLeft"
+                   [nzTooltipTitle]="form.get('responsibilityPersonId').value ? form.get('responsibilityPersonId').value : '-'">
+                  {{form.get('responsibilityPersonId').value ? form.get('responsibilityPersonId').value : '-'}}
+                </p>
+              </nz-form-text>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row>
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label>{{'确认人'}}</nz-form-label>
+          <nz-form-control nzErrorTip="该项必填">
+            <input nz-input
+                   *ngIf="edit; else problemDefinitionIdContent"
+                   formControlName="problemDefinitionId"
+                   [placeholder]="'请输入'"/>
+            <ng-template #problemDefinitionIdContent>
+              <nz-form-text>
+                <p class="view-font" nz-paragraph nzEllipsis nz-tooltip
+                   nzTooltipPlacement="topLeft"
+                   [nzTooltipTitle]="form.get('problemDefinitionId').value ? form.get('problemDefinitionId').value : '-'">
+                  {{form.get('problemDefinitionId').value ? form.get('problemDefinitionId').value : '-'}}
+                </p>
+              </nz-form-text>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="6" nzOffset="3">
+        <nz-form-item>
+          <nz-form-label>{{'确认日期'}}</nz-form-label>
+          <nz-form-control nzErrorTip="该项必填" *ngIf="edit; else problemDefinitionTimeContent">
+            <nz-date-picker [nzPlaceHolder]="'请选择'"
+                            formControlName="problemDefinitionTime"
+                            nzFormat="yyyy-MM-dd HH:mm:ss"
+            >
+            </nz-date-picker>
+          </nz-form-control>
+          <ng-template #problemDefinitionTimeContent>
+            <nz-form-text>
+              <p class="view-font" nz-paragraph nzEllipsis nz-tooltip
+                 nzTooltipPlacement="topLeft"
+                 [nzTooltipTitle]="form.get('problemDefinitionTime').value ? (form.get('problemDefinitionTime').value | date:'yyyy-MM-dd HH:mm:ss') : '-'">
+                {{form.get('problemDefinitionTime').value ? (form.get('problemDefinitionTime').value | date:'yyyy-MM-dd HH:mm:ss') : '-'}}
+              </p>
+            </nz-form-text>
+          </ng-template>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="6" nzOffset="3">
+        <nz-form-item>
+          <nz-form-label><span>{{'备注 '}}
+            <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="驳回时必填"></i>
+          </span></nz-form-label>
+          <nz-form-control nzErrorTip="驳回时必填">
+            <input nz-input
+                   *ngIf="edit; else noteContent"
+                   formControlName="note"
+                   [placeholder]="'驳回时必填'"/>
+            <ng-template #noteContent>
+              <nz-form-text>
+                <p class="view-font" nz-paragraph nzEllipsis nz-tooltip
+                   nzTooltipPlacement="topLeft"
+                   [nzTooltipTitle]="form.get('note').value ? form.get('note').value : '-'">
+                  {{form.get('note').value ? form.get('note').value : '-'}}
+                </p>
+              </nz-form-text>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <nz-form-item *ngIf="edit" style="float: right;">
+      <button nz-button nzType="primary"
+              [disabled]="!edit || form.invalid" (click)="submitForm()">{{"提交"}}</button>
+    </nz-form-item>
+    <nz-form-item *ngIf="!edit" style="float: right;">
+      <button nz-button nzType="default"
+              (click)="edit = true">{{"编辑"}}</button>
+    </nz-form-item>
+  </form>
+</div>

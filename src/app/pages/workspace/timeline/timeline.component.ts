@@ -1,4 +1,4 @@
-import {Component, Host, HostListener, Optional} from '@angular/core';
+import {Component, Host, HostListener, Input, Optional} from '@angular/core';
 import {CommonService} from '../../../service/common.service';
 
 @Component({
@@ -6,6 +6,9 @@ import {CommonService} from '../../../service/common.service';
   templateUrl: './timeline.component.html'
 })
 export class TimelineComponent {
+  @Input()
+  message;
+
   constructor(@Optional() @Host() private commonService: CommonService) {
     console.log('Workspace-TimeLine-Common:', this.commonService);
   }

@@ -17,7 +17,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   ],
 })
 export class PopupComponent {
-  private state: 'opened' | 'closed' = 'closed';
+  state: 'opened' | 'closed' = 'closed';
 
   @Input()
   set message(message: string) {

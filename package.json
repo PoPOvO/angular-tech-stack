@@ -1,9 +1,9 @@
 {
-  "name": "ng-zorro-practice",
+  "name": "angular-tech-stack",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.config.json --port 4300",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -20,31 +20,53 @@
     "@angular/platform-browser": "~8.2.3",
     "@angular/platform-browser-dynamic": "~8.2.3",
     "@angular/router": "~8.2.3",
-    "ng-zorro-antd": "^8.1.2",
+    "@antv/data-set": "^0.10.2",
+    "@antv/g2": "^3.5.11",
+    "document-register-element": "^1.7.2",
+    "file-saver": "^2.0.2",
+    "mi-my-lib": "file:../../@Study/my-lib/dist/my-lib/mi-my-lib-0.0.3.tgz",
+    "ng-zorro-antd": "8.5.2",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
-    "zone.js": "~0.9.1",
-    "document-register-element": "^1.7.2"
+    "viser-ng": "^2.5.2",
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.803.0",
+    "@angular-devkit/build-angular": "^0.901.0",
+    "@angular-devkit/build-ng-packagr": "~0.803.4",
     "@angular/cli": "~8.3.0",
     "@angular/compiler-cli": "~8.2.3",
     "@angular/language-service": "~8.2.3",
-    "@types/node": "~8.9.4",
+    "@types/file-saver": "^2.0.1",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
+    "cz-conventional-changelog": "^3.0.2",
+    "husky": "^3.1.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~4.1.0",
+    "karma": "^4.4.1",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
+    "ng-packagr": "^5.4.0",
     "protractor": "~5.4.0",
+    "source-map-explorer": "^2.2.2",
     "ts-node": "~7.0.0",
+    "tsickle": "^0.37.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }

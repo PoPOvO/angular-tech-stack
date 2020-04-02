@@ -1,0 +1,33 @@
+<nz-card style="width: 100%;margin-bottom: 24px;" [nzActions]="[actionCopy, actionView, actionCode]">
+  <ng-content></ng-content>
+  <div style="border-radius: 0; padding-top: 24px;border-bottom: 1px dashed #ebedf0; margin-bottom: -14px; margin-left: -24px; margin-right: -24px;"></div>
+  <nz-card-meta
+    [nzTitle]="boxTitle"
+    [nzDescription]="content"
+  ></nz-card-meta>
+  <ng-template #boxTitle>
+    <div>
+      {{title}}
+    </div>
+  </ng-template>
+</nz-card>
+
+<ng-template #actionCopy>
+  <i nz-icon nz-tooltip
+     [nzType]="copied ? 'check' : 'snippets'"
+     (click)="copyAction()"
+     nzTheme="outline"></i>
+</ng-template>
+<ng-template #actionCode>
+  <i nz-icon nz-tooltip
+     [nzType]="code ? 'check' : 'code'"
+     (click)="codeAction()"
+     nzTheme="outline"></i>
+</ng-template>
+<ng-template #actionView>
+  <i nz-icon nz-tooltip
+     [nzType]="view ? 'eye' : 'eye-invisible'"
+     (click)="viewAction()"
+     nzTheme="outline"></i>
+</ng-template>
+

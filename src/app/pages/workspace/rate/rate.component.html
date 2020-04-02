@@ -1,5 +1,17 @@
 <p appHighlight="red">PPPPPPPPPP</p>
+
+<!--<app-table></app-table>-->
+<ng-container [ngTemplateOutlet]="element">
+  123
+</ng-container>
+
+<ng-template #element>
+  <app-card>
+    <app-timeline
+      [message]="'一些消息显示'"
+    ></app-timeline>
+    <app-slider></app-slider>
+  </app-card>
+</ng-template>
 <nz-rate [ngModel]="2.5" nzAllowHalf></nz-rate>
-<app-card>
-  <app-timeline></app-timeline>
-</app-card>
+<lib-rate></lib-rate>

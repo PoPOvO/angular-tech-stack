@@ -1,28 +1,56 @@
-<nz-table #colSpanTable
-          [nzData]="dateSetElse"
-          nzBordered>
-  <thead>
-    <ng-container *ngFor="let headRow of tableHead1">
-      <tr>
-        <!-- 迭代表头 -->
-      <ng-container *ngFor="let key of headList">
-        <th *ngIf="headRow[key]?.rowspan > 0 && headRow[key]?.colspan > 0"
-            [attr.colspan]="headRow[key]?.colspan"
-            [attr.rowspan]="headRow[key]?.rowspan">{{headRow[key]?.value}}
-        </th>
-      </ng-container>
-      </tr>
-    </ng-container>
-  </thead>
-  <tbody>
-    <!-- 迭代数据集 -->
-    <tr *ngFor="let data of dateSetElse; let i = index">
-      <ng-container *ngFor="let key of headList">
-        <td *ngIf="data[key]?.rowspan > 0"
-            [attr.colspan]="data[key]?.colspan"
-            [attr.rowspan]="data[key]?.rowspan">{{data[key]?.value}}
-        </td>
-      </ng-container>
-    </tr>
-  </tbody>
-</nz-table>
+<app-code-box
+  [title]="'文件下载测试'"
+  [content]="'后端生成二进制文件流'"
+>
+  <div nz-row>
+    <div nz-col nzSpan="6">
+      <button nz-button nzType="primary" nzShape="round" [nzLoading]="exportLoading1" (click)="fileDownLoad1()">
+        <i nz-icon nzType="download"></i>下载：使用file-saver库
+      </button>
+    </div>
+    <div nz-col nzSpan="6">
+      <button nz-button nzType="primary" nzShape="round" [nzLoading]="exportLoading2" (click)="fileDownLoad2()">
+        <i nz-icon nzType="download"></i>下载：使用window.open
+      </button>
+    </div>
+    <div nz-col nzSpan="6">
+      <button nz-button nzType="primary" nzShape="round" [nzLoading]="exportLoading3" (click)="fileDownLoad3()">
+        <i nz-icon nzType="download"></i>下载：使用“a”元素
+      </button>
+    </div>
+  </div>
+</app-code-box>
+<app-code-box
+  [title]="'文件下载测试'"
+  [content]="'前端生成二进制文件流'"
+>
+  <div nz-row>
+    <div nz-col nzSpan="6">
+      <button nz-button nzType="primary" nzShape="round" (click)="fileDownLoad4()">
+        <i nz-icon nzType="download"></i>下载：使用ng-alain的xlsService
+      </button>
+    </div>
+  </div>
+</app-code-box>
+
+<!--<nz-tree-->
+  <!--[nzData]="nodes"-->
+  <!--nzCheckable-->
+  <!--nzMultiple-->
+  <!--(nzClick)="nzEvent($event)"-->
+  <!--[nzCheckedKeys]="defaultCheckedKeys"-->
+  <!--(nzExpandChange)="nzEvent($event)"-->
+  <!--(nzCheckBoxChange)="nzEvent($event)"-->
+<!--&gt;-->
+<!--</nz-tree>-->
+
+<!--<nz-tree-->
+  <!--[nzData]="nodes1"-->
+  <!--nzCheckable-->
+  <!--nzMultiple-->
+  <!--(nzClick)="nzEvent($event)"-->
+  <!--(nzExpandChange)="nzEvent($event)"-->
+  <!--(nzCheckBoxChange)="nzEvent($event)"-->
+<!--&gt;-->
+<!--</nz-tree>-->
+

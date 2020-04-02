@@ -7,7 +7,14 @@ export const CONTROLLER_VALUE_ACCESSOR: any = {
   multi: true
 };
 /**
- * 用户自定义Form控件
+ * 用户自定义count控件:
+ *
+ * View：这里的Model并不是`_count`，而是主组件中的`ngModel`或者`formControl`对应的FormControl对象，
+ * `_count`仅仅是一个中间变量，用于表单控件的属性绑定，去更新View的值。可以说，_count就等价于View的值。
+ *
+ * Model：这里的Model就是主组件中的`ngModel`或者`formControl`对应的FormControl对象
+ *
+ * ControlValueAccessor做的就是同步`View`和`Model`的值，即`_count`和`formControl对象`的值。
  */
 @Component({
   selector: 'custom-control',
@@ -16,19 +23,16 @@ export const CONTROLLER_VALUE_ACCESSOR: any = {
   providers: [CONTROLLER_VALUE_ACCESSOR]
 })
 export class CustomControlComponent implements OnInit, ControlValueAccessor {
+  // 计数器
   _count: number;
 
+  // 通过该callback更新Model
   propagateChange = (_: any) => {};
 
   @Input()
   set count(count: number) {
-    if (count) {
-      this._count = count;
-    } else {
-      this._count = 0;
-    }
-
-    // 调用valueChange回调函数
+    this._count = count ? count : 0;
+    // 调用callback更新model
     this.propagateChange(this._count);
   }
 
@@ -46,26 +50,25 @@ export class CustomControlComponent implements OnInit, ControlValueAccessor {
     this.propagateChange(this.count);
   }
 
-  constructor() { }
-
   ngOnInit() {
   }
 
   registerOnChange(fn: any): void {
-    console.log('V->M', fn);
+    console.error('V->M', fn);
     this.propagateChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
-  }
+  registerOnTouched(fn: any): void {}
 
-  setDisabledState(isDisabled: boolean): void {
-  }
+  setDisabledState(isDisabled: boolean): void {}
 
   writeValue(obj: any): void {
-    console.log('M->V', obj);
+    console.error('M->V', obj);
+    // 更新表单控件的值
     if (obj) {
       this.count = obj;
     }
   }
+
+  constructor() { }
 }

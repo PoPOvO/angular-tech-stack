@@ -14,7 +14,9 @@ export class UnlessDirective {
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef) { }
-  @Input() set appUnless(condition: boolean) {
+
+  @Input()
+  set appUnless(condition: boolean) {
     console.log("View:", this.templateRef, this.viewContainer);
     // 如果条件为false，并且指令包裹的视图没有创建则创建新视图
     if (!condition && !this.hasView) {

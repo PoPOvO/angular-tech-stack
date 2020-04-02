@@ -1,51 +1,150 @@
-<div #te nz-col [nzSpan]="8">
-    <all-select
-      [optionValues]="optionValues"
-      [disableAllSelected]="false"
-      [formControl]="control"
-      (ngModelChange)="selectValueChange($event)"
-    >
-    </all-select>
-
-    <!--<custom-control-->
-      <!--[ngModel]="5"-->
-    <!--&gt;-->
-    <!--</custom-control>-->
-    <!--<br>-->
-    <!--<app-all-select-else-->
-      <!--*appUnless="true"-->
+<!--<div #te nz-col [nzSpan]="16">-->
+    <!--<all-select-->
       <!--[optionValues]="optionValues"-->
-      <!--[disableAllSelected]="false"-->
       <!--[formControl]="control"-->
       <!--(ngModelChange)="selectValueChange($event)"-->
     <!--&gt;-->
-    <!--</app-all-select-else>-->
-  <ng-container *ngFor="let data of (arr | arrFilter)">
-    <p>{{data.value}}</p>
-  </ng-container>
-  <button nz-button nzType="primary" (click)="add()">新增</button>
-</div>
-<div #bb class="test" style="width: 200px;height: 200px"
->
-  {{today | date:format}}-------{{10 | numberPow:3}}
-</div>
+    <!--</all-select>-->
 
-<!--<div nz-col [nzSpan]="8">-->
-  <!--<all-select-->
-    <!--[optionValues]="optionValues"-->
-    <!--(valuesChange)="selectValueChange($event)"-->
-    <!--[disableAllSelected]="false"-->
-    <!--[formControl]="control"-->
-  <!--&gt;-->
-  <!--</all-select>-->
+    <!--<br>-->
+    <!--<custom-control-->
+      <!--[ngModel]="5"-->
+      <!--(ngModelChange)="change($event)"-->
+    <!--&gt;-->
+    <!--</custom-control>-->
+    <!--<br>-->
+
+  <!--<div nz-row>-->
+    <!--<app-icon-input [icon]="'github'">-->
+      <!--<input-->
+        <!--appIconInputRef-->
+        <!--(keyup)="change(input.value)"-->
+        <!--#input-->
+      <!--&gt;-->
+      <!--<i nz-icon style="padding-right: 2px;" [nzType]="'github'" nzTheme="fill"></i>-->
+    <!--</app-icon-input>-->
+  <!--</div>-->
+
+  <!--<div *ngIf="true">-->
+    <!--一段文字-->
+  <!--</div>-->
+  <!--<ng-template [ngIf]="true">-->
+    <!--<div>-->
+      <!--一段文字-->
+    <!--</div>-->
+  <!--</ng-template>-->
+  <!--&lt;!&ndash;<div nz-row style="padding-top: 16px;">&ndash;&gt;-->
+    <!--&lt;!&ndash;<app-icon-input&ndash;&gt;-->
+      <!--&lt;!&ndash;[icon]="'weibo-circle'"&ndash;&gt;-->
+      <!--&lt;!&ndash;(value)="change($event)"&ndash;&gt;-->
+    <!--&lt;!&ndash;&gt;</app-icon-input>&ndash;&gt;-->
+  <!--&lt;!&ndash;</div>&ndash;&gt;-->
+  <!--<br>-->
+  <!--<br>-->
+  <!--<br>-->
+    <!--&lt;!&ndash;<app-all-select-else&ndash;&gt;-->
+      <!--&lt;!&ndash;*appUnless="true"&ndash;&gt;-->
+      <!--&lt;!&ndash;[optionValues]="optionValues"&ndash;&gt;-->
+      <!--&lt;!&ndash;[disableAllSelected]="false"&ndash;&gt;-->
+      <!--&lt;!&ndash;[formControl]="control"&ndash;&gt;-->
+      <!--&lt;!&ndash;(ngModelChange)="selectValueChange($event)"&ndash;&gt;-->
+    <!--&lt;!&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;</app-all-select-else>&ndash;&gt;-->
+  <!--&lt;!&ndash;<ng-container *ngFor="let data of (arr | arrFilter)">&ndash;&gt;-->
+  <!--<ng-container *ngFor="let data of (arr)">-->
+    <!--<p>测试Pipe的变更检测算法：{{data.value}}</p>-->
+  <!--</ng-container>-->
+
+  <!--<button nz-button nzType="primary" (click)="add()">新增</button>-->
 <!--</div>-->
-<br/>
-<br/>
-<input #input value="Message">
-<button (click)="popup.showAsComponent(input.value)">Show as component</button>
-<button (click)="popup.showAsElement(input.value)">Show as element</button>
-<my-dialog [content]="'World!'" [content1]="'Hello!'" [content2]="''"></my-dialog>
+<!--<div #bb class="test" style="width: 200px;height: 200px"-->
+<!--&gt;-->
+  <!--{{today | date:format}}-&#45;&#45;&#45;&#45;&#45;&#45;{{10 | numberPow:3}}-->
+<!--</div>-->
 
-<hr>
-<p style="text-align: center">表单验证</p>
+<!--&lt;!&ndash;<div nz-col [nzSpan]="6">&ndash;&gt;-->
+  <!--&lt;!&ndash;<all-select&ndash;&gt;-->
+    <!--&lt;!&ndash;[optionValues]="optionValues"&ndash;&gt;-->
+    <!--&lt;!&ndash;(valuesChange)="selectValueChange($event)"&ndash;&gt;-->
+    <!--&lt;!&ndash;[disableAllSelected]="false"&ndash;&gt;-->
+    <!--&lt;!&ndash;[formControl]="control"&ndash;&gt;-->
+  <!--&lt;!&ndash;&gt;&ndash;&gt;-->
+  <!--&lt;!&ndash;</all-select>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--<br/>-->
+<!--<br/>-->
+<!--<input #input value="Message">-->
+<!--<button (click)="popup.showAsComponent(input.value)">Show as component</button>-->
+<!--<button (click)="popup.showAsElement(input.value)">Show as element</button>-->
+<!--<my-dialog [content]="'World!'" [content1]="'Hello!'" [content2]="''"></my-dialog>-->
+
+<!--<hr>-->
+<!--<p style="text-align: center">表单验证</p>-->
+<button nz-button nzType="primary" (click)="edit = !edit">切换</button>
+<div>
+  <form nz-form [nzLayout]="'horizontal'" [formGroup]="f">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="4">{{'姓名'}}</nz-form-label>
+      <nz-form-control [nzSpan]="6" nzErrorTip="该项必填" *ngIf="edit; else nameContent">
+        <nz-select
+          nzAllowClear
+          nzShowSearch
+          formControlName="name"
+          (ngModelChange)="nameChange($event)"
+          [nzPlaceHolder]="'请选择'"
+        >
+          <ng-container *ngFor="let item of nameList">
+            <nz-option [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
+          </ng-container>
+        </nz-select>
+      </nz-form-control>
+      <ng-template #nameContent>
+        <nz-form-control>
+          {{f.get('name').value}}
+        </nz-form-control>
+      </ng-template>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="4">
+        <span>
+             {{'姓名Copy'}}
+          <i
+            nz-icon
+            nz-tooltip
+            nzTitle="控制“姓名”选择框：选择该选择框，“姓名”选择框同步更新"
+            nzType="question-circle"
+            nzTheme="outline"
+          ></i>
+        </span>
+      </nz-form-label>
+      <nz-form-control [nzSpan]="6">
+        <nz-select
+          nzAllowClear
+          nzShowSearch
+          formControlName="nameCopy"
+          [nzPlaceHolder]="'请选择'"
+          (ngModelChange)="nameCopyChange($event)"
+        >
+          <ng-container *ngFor="let item of nameList">
+            <nz-option [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
+          </ng-container>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
+  <!--<div>-->
+    <!--<nz-select style="width: 200px;"-->
+               <!--[(ngModel)]="selectedValue"-->
+               <!--[ngModelOptions]="{standalone: true}"-->
+               <!--nzMode="multiple" nzAllowClear nzPlaceHolder="Choose"-->
+               <!--(ngModelChange)="change($event)">-->
+      <!--<nz-option nzValue="jack" nzLabel="jack"></nz-option>-->
+      <!--<nz-option nzValue="lucy" nzLabel="lucy"></nz-option>-->
+      <!--<nz-option nzValue="alice" nzLabel="alice"></nz-option>-->
+      <!--<nz-option nzValue="bob" nzLabel="bob"></nz-option>-->
+    <!--</nz-select>-->
+  <!--</div>-->
+
 

@@ -1,0 +1,26 @@
+<nz-table
+  #borderedTable
+  [nzData]="dataSet"
+  nzBordered
+
+>
+  <thead>
+    <tr>
+      <ng-container *ngFor="let col of columns">
+        <th nzAlign="center" [nzWidth]="col.width">{{col.title}}</th>
+      </ng-container>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of borderedTable.data">
+      <ng-container *ngFor="let head of columns">
+        <td nzAlign="center">
+          <!--<p nz-paragraph nzEllipsis nz-tooltip-->
+             <!--nzTooltipPlacement="topLeft" [nzTooltipTitle]="data[head.index]">-->
+            {{data[head.index]}}
+          <!--</p>-->
+        </td>
+      </ng-container>
+    </tr>
+  </tbody>
+</nz-table>

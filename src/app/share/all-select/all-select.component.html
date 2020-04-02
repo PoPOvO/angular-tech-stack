@@ -1,4 +1,5 @@
 <nz-select
+  #select
   style="width: 100%"
   nzShowSearch
   nzAllowClear
@@ -8,8 +9,10 @@
   (ngModelChange)="valuesChange($event)"
   (nzOnSearch)="onSearch($event)"
   [nzMaxTagCount]="nzMaxTagCount"
+  [nzMaxMultipleCount]="nzMaxMultipleCount"
   [nzAutoClearSearchValue]="nzAutoClearSearchValue"
   [nzDropdownMatchSelectWidth]="nzDropdownMatchSelectWidth"
+  [nzDisabled]="nzDisabled"
   [nzDropdownRender]="render"
 >
   <ng-container *ngFor="let option of optionValues">
@@ -17,7 +20,7 @@
   </ng-container>
 </nz-select>
 <ng-template #render>
-  <div *ngIf="enableRender === true" style="padding: 6px 12px;">
+  <div *ngIf="enableRender === true && !disableAllSelected" style="padding: 6px 12px;">
     <nz-switch [(ngModel)]="allSelected" (ngModelChange)="switchChange()" nzCheckedChildren="全选" nzUnCheckedChildren="清除"></nz-switch>
   </div>
 </ng-template>

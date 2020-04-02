@@ -14,6 +14,13 @@ import { CustomControlComponent } from './custom-control/custom-control.componen
 import { UnlessDirective } from './directive/unless.directive';
 import { NumberPowPipe } from './pipe/number-pow.pipe';
 import { ArrFilterPipe } from './pipe/arr-filter.pipe';
+import { EmbedTemplateDirective } from './directive/embed-template.directive';
+import {MyLibModule} from 'mi-my-lib';
+import { IconInputComponent } from './icon-input/icon-input.component';
+import { IconInputRefDirective } from './icon-input/icon-input-ref.directive';
+import { CodeBoxComponent } from './code-box/code-box.component';
+import {G2CustomLegendIComponent} from '../pages/g2-chart/g2-custom-legend-i/g2-custom-legend-i.component';
+import {G2ChartModule} from '../pages/g2-chart/g2-chart.module';
 
 /**
  * 共享模块
@@ -28,14 +35,19 @@ import { ArrFilterPipe } from './pipe/arr-filter.pipe';
     CustomControlComponent,
     UnlessDirective,
     NumberPowPipe,
-    ArrFilterPipe
+    ArrFilterPipe,
+    EmbedTemplateDirective,
+    IconInputComponent,
+    IconInputRefDirective,
+    CodeBoxComponent
   ],
   imports: [
     CommonModule,
     NgZorroAntdModule,
     ReactiveFormsModule,
     FormsModule,
-    ShareRoutingModule
+    ShareRoutingModule,
+    MyLibModule
   ],
   // 需要导出
   exports: [
@@ -52,7 +64,12 @@ import { ArrFilterPipe } from './pipe/arr-filter.pipe';
     AllSelectElseComponent,
     UnlessDirective,
     NumberPowPipe,
-    ArrFilterPipe
+    ArrFilterPipe,
+    EmbedTemplateDirective,
+    IconInputComponent,
+    IconInputRefDirective,
+    CodeBoxComponent,
+    MyLibModule
   ],
   providers: [
     PopupService
