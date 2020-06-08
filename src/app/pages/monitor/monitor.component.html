@@ -80,60 +80,60 @@
 
 <!--<hr>-->
 <!--<p style="text-align: center">表单验证</p>-->
-<button nz-button nzType="primary" (click)="edit = !edit">切换</button>
-<div>
-  <form nz-form [nzLayout]="'horizontal'" [formGroup]="f">
-    <nz-form-item>
-      <nz-form-label [nzSpan]="4">{{'姓名'}}</nz-form-label>
-      <nz-form-control [nzSpan]="6" nzErrorTip="该项必填" *ngIf="edit; else nameContent">
-        <nz-select
-          nzAllowClear
-          nzShowSearch
-          formControlName="name"
-          (ngModelChange)="nameChange($event)"
-          [nzPlaceHolder]="'请选择'"
-        >
-          <ng-container *ngFor="let item of nameList">
-            <nz-option [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
-          </ng-container>
-        </nz-select>
-      </nz-form-control>
-      <ng-template #nameContent>
-        <nz-form-control>
-          {{f.get('name').value}}
-        </nz-form-control>
-      </ng-template>
-    </nz-form-item>
+<!--<button nz-button nzType="primary" (click)="edit = !edit">切换</button>-->
+<!--<div>-->
+<!--  <form nz-form [nzLayout]="'horizontal'" [formGroup]="f">-->
+<!--    <nz-form-item>-->
+<!--      <nz-form-label [nzSpan]="4">{{'姓名'}}</nz-form-label>-->
+<!--      <nz-form-control [nzSpan]="6" nzErrorTip="该项必填" *ngIf="edit; else nameContent">-->
+<!--        <nz-select-->
+<!--          nzAllowClear-->
+<!--          nzShowSearch-->
+<!--          formControlName="name"-->
+<!--          (ngModelChange)="nameChange($event)"-->
+<!--          [nzPlaceHolder]="'请选择'"-->
+<!--        >-->
+<!--          <ng-container *ngFor="let item of nameList">-->
+<!--            <nz-option [nzLabel]="item.label" [nzValue]="item.value"></nz-option>-->
+<!--          </ng-container>-->
+<!--        </nz-select>-->
+<!--      </nz-form-control>-->
+<!--      <ng-template #nameContent>-->
+<!--        <nz-form-control>-->
+<!--          {{f.get('name').value}}-->
+<!--        </nz-form-control>-->
+<!--      </ng-template>-->
+<!--    </nz-form-item>-->
 
-    <nz-form-item>
-      <nz-form-label [nzSpan]="4">
-        <span>
-             {{'姓名Copy'}}
-          <i
-            nz-icon
-            nz-tooltip
-            nzTitle="控制“姓名”选择框：选择该选择框，“姓名”选择框同步更新"
-            nzType="question-circle"
-            nzTheme="outline"
-          ></i>
-        </span>
-      </nz-form-label>
-      <nz-form-control [nzSpan]="6">
-        <nz-select
-          nzAllowClear
-          nzShowSearch
-          formControlName="nameCopy"
-          [nzPlaceHolder]="'请选择'"
-          (ngModelChange)="nameCopyChange($event)"
-        >
-          <ng-container *ngFor="let item of nameList">
-            <nz-option [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
-          </ng-container>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-  </form>
-</div>
+<!--    <nz-form-item>-->
+<!--      <nz-form-label [nzSpan]="4">-->
+<!--        <span>-->
+<!--             {{'姓名Copy'}}-->
+<!--          <i-->
+<!--            nz-icon-->
+<!--            nz-tooltip-->
+<!--            nzTitle="控制“姓名”选择框：选择该选择框，“姓名”选择框同步更新"-->
+<!--            nzType="question-circle"-->
+<!--            nzTheme="outline"-->
+<!--          ></i>-->
+<!--        </span>-->
+<!--      </nz-form-label>-->
+<!--      <nz-form-control [nzSpan]="6">-->
+<!--        <nz-select-->
+<!--          nzAllowClear-->
+<!--          nzShowSearch-->
+<!--          formControlName="nameCopy"-->
+<!--          [nzPlaceHolder]="'请选择'"-->
+<!--          (ngModelChange)="nameCopyChange($event)"-->
+<!--        >-->
+<!--          <ng-container *ngFor="let item of nameList">-->
+<!--            <nz-option [nzLabel]="item.label" [nzValue]="item.value"></nz-option>-->
+<!--          </ng-container>-->
+<!--        </nz-select>-->
+<!--      </nz-form-control>-->
+<!--    </nz-form-item>-->
+<!--  </form>-->
+<!--</div>-->
   <!--<div>-->
     <!--<nz-select style="width: 200px;"-->
                <!--[(ngModel)]="selectedValue"-->
@@ -147,4 +147,9 @@
     <!--</nz-select>-->
   <!--</div>-->
 
+<app-line-chrt></app-line-chrt>
 
+<p>QuickBI页面：</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" width="100%" height="95%"
+        src="https://das.base.shuju.aliyun.com/dashboard/view/pc.htm?pageId=6225adfe-d74a-40c3-b613-13a29f661252&accessToken=0a07e7f78f7420d81625d6a0db0e7988">
+</iframe>
