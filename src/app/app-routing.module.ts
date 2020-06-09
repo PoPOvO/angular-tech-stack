@@ -12,6 +12,20 @@ const routes: Routes = [
       { path: 'table', loadChildren: () => import('./pages/ng-zorro/table/table.module').then(m => m.TableModule)},
       { path: 'form', loadChildren: () => import('./pages/ng-zorro/form/form.module').then(m => m.FormModule)}
     ]
+  },
+  {
+    path: 'css-basic',
+    children: [
+      { path: 'building-blocks', loadChildren: () => import('./pages/css-basic/building-blocks/building-blocks.module').then(m => m.BuildingBlocksModule) },
+      { path: 'styling-text', loadChildren: () => import('./pages/css-basic/styling-text/styling-text.module').then(m => m.StylingTextModule) },
+      { path: 'layout', loadChildren: () => import('./pages/css-basic/layout/layout.module').then(m => m.LayoutModule) }
+    ]
+  },
+  {
+    path: 'front-lib',
+    children: [
+      { path: 'draggable-grid-lib', loadChildren: () => import('./pages/front-end-lib/draggable-grid-lib/draggable-grid-lib.module').then(m => m.DraggableGridLibModule) },
+    ]
   }
 ];
 

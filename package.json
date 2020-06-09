@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~8.2.3",
+    "@angular/cdk": "~8.2.3",
     "@angular/common": "~8.2.3",
     "@angular/compiler": "~8.2.3",
     "@angular/core": "~8.2.3",
@@ -22,9 +23,10 @@
     "@angular/router": "~8.2.3",
     "@antv/data-set": "^0.10.2",
     "@antv/g2": "^3.5.11",
+    "angular-gridster2": "^9.1.0",
     "document-register-element": "^1.7.2",
     "file-saver": "^2.0.2",
-    "mi-my-lib": "file:../../@Study/my-lib/dist/my-lib/mi-my-lib-0.0.3.tgz",
+    "mi-my-lib": "file:static-lib/mi-my-lib-0.0.3.tgz",
     "ng-zorro-antd": "8.5.2",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
@@ -32,7 +34,7 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.901.0",
+    "@angular-devkit/build-angular": "~0.803.25",
     "@angular-devkit/build-ng-packagr": "~0.803.4",
     "@angular/cli": "~8.3.0",
     "@angular/compiler-cli": "~8.2.3",

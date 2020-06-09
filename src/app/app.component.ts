@@ -1,25 +1,26 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {environment} from '../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {HelloService} from './service/hello.service';
 import {RouterOutlet} from '@angular/router';
+import {Base} from './pages/Base';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, AfterViewInit{
+export class AppComponent extends Base implements OnInit, AfterViewInit {
   @ViewChild('r', {static: false})
   r: RouterOutlet;
 
   fun = () => {
     console.log("fun");
-  };
+  }
 
   constructor(
     private http: HttpClient,
   ) {
+    super();
     const obj = {
       prop: "属性",
       fun: this.fun
@@ -66,6 +67,8 @@ export class AppComponent implements OnInit, AfterViewInit{
   isCollapsed = false;
 
   ngOnInit(): void {
+    // var o = {}; // !!! 语法错误
+    // console.log('YYYYYYYYYYYYYYYYYYYYYYYYYYYYY', o);
   }
 
   test(r: RouterOutlet) {

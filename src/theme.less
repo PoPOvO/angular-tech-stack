@@ -1,6 +1,14 @@
 @import "../node_modules/ng-zorro-antd/ng-zorro-antd.less";
+// 实验性功能
+@import "../node_modules/ng-zorro-antd/resizable/style/entry.less";
 // The prefix to use on all css classes from ant.
 @ant-prefix : ant;
+
+// --------nz-layout--------
+.ant-layout, .ant-layout * {
+  box-sizing: content-box;
+  //box-sizing: border-box;
+}
 
 // -------- Colors -----------
 @primary-color : @blue-6;

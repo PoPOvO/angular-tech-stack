@@ -4,7 +4,7 @@
             nzWidth="224px"
             nzBreakpoint="md"
             [(nzCollapsed)]="isCollapsed"
-            [nzTrigger]="zeroTrigger">
+            [nzTrigger]="null">
     <ng-template #zeroTrigger>
       <i nz-icon nzType="menu-fold" nzTheme="outline"></i>
     </ng-template>
@@ -28,9 +28,9 @@
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="UI库相关" nzIcon="dashboard">
+      <li nz-submenu [nzOpen]="false" nzTitle="UI库相关" nzIcon="shop">
         <ul>
-          <li nz-submenu nzOpen nzTitle="NG-ZORRO">
+          <li nz-submenu [nzOpen]="false" nzTitle="NG-ZORRO">
             <ul>
               <li nz-menu-item nzMatchRouter>
                 <a routerLink="/ng-zorro/table">表格</a>
@@ -42,12 +42,51 @@
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="图表相关" nzIcon="form">
+      <li nz-submenu [nzOpen]="false" nzTitle="图表相关" nzIcon="pie-chart">
         <ul>
-          <li nz-submenu nzOpen nzTitle="G2图表">
+          <li nz-submenu [nzOpen]="false" nzTitle="G2图表">
             <ul>
               <li nz-menu-item nzMatchRouter>
                 <a routerLink="/g2">图例相关</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu [nzOpen]="false" nzTitle="CSS-设计Web" nzIcon="pushpin">
+        <ul>
+          <li nz-submenu [nzOpen]="false" nzTitle="CSS构建块">
+            <ul>
+              <li nz-menu-item nzMatchRouter>
+                <a routerLink="/css-basic/building-blocks/box">Box模型</a>
+              </li>
+            </ul>
+          </li>
+          <li nz-submenu [nzOpen]="false" nzTitle="CSS样式化文字">
+            <ul>
+              <li nz-menu-item nzMatchRouter>
+                <a routerLink="/css-basic/styling-text">占位</a>
+              </li>
+            </ul>
+          </li>
+          <li nz-submenu [nzOpen]="false" nzTitle="CSS排版">
+            <ul>
+              <li nz-menu-item nzMatchRouter>
+                <a routerLink="/css-basic/layout">基本布局</a>
+              </li>
+              <li nz-menu-item nzMatchRouter>
+                <a routerLink="/css-basic/layout/normal">默认布局</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu [nzOpen]="false" nzTitle="优秀前端库" nzIcon="pie-chart">
+        <ul>
+          <li nz-submenu [nzOpen]="false" nzTitle="可拖拽网格布局">
+            <ul>
+              <li nz-menu-item nzMatchRouter>
+                <a routerLink="/front-lib/draggable-grid-lib">gridster</a>
               </li>
             </ul>
           </li>
@@ -58,21 +97,32 @@
   <nz-layout>
     <nz-header>
       <div class="app-header" nz-row>
-        <div nz-col style="padding-right: 24px;" [nzSpan]="5" [nzPush]="15">
-          <nz-input-group [nzSuffix]="suffixIconSearch">
-            <input type="text" nz-input placeholder="search" />
-          </nz-input-group>
-          <ng-template #suffixIconSearch>
-            <i nz-icon nzType="search"></i>
-          </ng-template>
+        <div nz-col [nzSpan]="6">
+          <i
+            class="trigger"
+            nz-icon
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+            (click)="isCollapsed = !isCollapsed"
+          ></i>
         </div>
       </div>
     </nz-header>
     <div class="inner-content">
       <router-outlet #r='outlet'></router-outlet>
     </div>
-    <button nz-button nzType="primary" (click)="test(r)">{{"测试"}}</button>
+<!--    <button nz-button nzType="primary" (click)="test(r)">{{"测试"}}</button>-->
     <nz-footer style="text-align: center">©2020 我是底线的</nz-footer>
   </nz-layout>
 </nz-layout>
 
+<!--<div nz-row class="box-container">-->
+<!--  <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="8" nzXl="8" nzXXl="8">-->
+<!--    Col-->
+<!--  </div>-->
+<!--  <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="8" nzXl="8" nzXXl="8">-->
+<!--    Col-->
+<!--  </div>-->
+<!--  <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="8" nzXl="8" nzXXl="8">-->
+<!--    Col-->
+<!--  </div>-->
+<!--</div>-->

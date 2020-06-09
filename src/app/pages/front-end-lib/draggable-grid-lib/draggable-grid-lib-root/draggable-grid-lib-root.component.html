@@ -1,0 +1,20 @@
+<div style="height: 48px">
+  <button nz-button nzType="primary"
+          nzShape="circle"
+          style="margin-bottom: 8px;"
+          (click)="addItem()"
+  ><i nz-icon nzType="plus"></i></button>
+</div>
+
+<div style="overflow-x: hidden; overflow-y: auto;height: calc(100% - 48px);">
+  <gridster [options]="options">
+    <gridster-item [item]="item" *ngFor="let item of dashboard">
+      <div class="button-holder">
+        <button nz-button (mousedown)="removeItem($event, item)"
+                (touchstart)="removeItem($event, item)">
+          删除
+        </button>
+      </div>
+    </gridster-item>
+  </gridster>
+</div>

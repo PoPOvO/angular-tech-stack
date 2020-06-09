@@ -19,8 +19,9 @@ import {MyLibModule} from 'mi-my-lib';
 import { IconInputComponent } from './icon-input/icon-input.component';
 import { IconInputRefDirective } from './icon-input/icon-input-ref.directive';
 import { CodeBoxComponent } from './code-box/code-box.component';
-import {G2CustomLegendIComponent} from '../pages/g2-chart/g2-custom-legend-i/g2-custom-legend-i.component';
-import {G2ChartModule} from '../pages/g2-chart/g2-chart.module';
+import {NzResizableModule} from 'ng-zorro-antd/resizable';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {GridsterModule} from 'angular-gridster2';
 
 /**
  * 共享模块
@@ -47,7 +48,11 @@ import {G2ChartModule} from '../pages/g2-chart/g2-chart.module';
     ReactiveFormsModule,
     FormsModule,
     ShareRoutingModule,
-    MyLibModule
+    NzResizableModule,
+    DragDropModule,
+    MyLibModule,
+    GridsterModule,
+    NzResizableModule
   ],
   // 需要导出
   exports: [
@@ -69,7 +74,11 @@ import {G2ChartModule} from '../pages/g2-chart/g2-chart.module';
     IconInputComponent,
     IconInputRefDirective,
     CodeBoxComponent,
-    MyLibModule
+    NzResizableModule,
+    MyLibModule,
+    DragDropModule,
+    GridsterModule,
+    NzResizableModule
   ],
   providers: [
     PopupService

@@ -1,0 +1,20 @@
+<app-code-box
+  [title]="'块级盒子'"
+  [content]="'练习盒子模型'"
+>
+  <div style="height: 200px; width: 200px;">
+    <div style="background: #56c5ff;height: 200px;width: 200px;padding: 24px;margin: 24px;border: 2px solid black">
+      块级盒子
+    </div>
+    <p>22</p>
+  </div>
+</app-code-box>
+
+<app-code-box
+  [title]="'内联盒子'"
+  [content]="'练习盒子模型'"
+>
+  <div style="height: 84px;" class="flex-center">
+    <span style="background: #56c5ff;margin: 24px;padding: 24px;border: 2px solid black">内联盒子</span>
+  </div>
+</app-code-box>

@@ -1,0 +1,16 @@
+<div nz-row style="margin-bottom: 24px;">
+  <button nz-button nzType="primary" (click)="changeAd()">切换广告1</button>
+  <button nz-button nzType="primary" style="margin-left: 24px;" (click)="addAd()">新增额外广告</button>
+  <button nz-button nzType="primary" style="margin-left: 24px;" (click)="clearAd()">清除额外广告</button>
+</div>
+
+<div ad-host>
+  <app-ad-banner #adBanner [ads]="ads"></app-ad-banner>
+</div>
+
+<hr>
+
+<h2>CSS布局</h2>
+
+<router-outlet></router-outlet>
+
